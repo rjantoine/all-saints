@@ -19,6 +19,7 @@ export default function HomePage({page, events, news}) {
     post.publishedAt = new Date(post.publishedAt)
   })
 
+
   return <Layout title={page.title}>
     <div>
       <PortableText
