@@ -1,5 +1,7 @@
+.idea
 .vercel
 .next
 public/studio
 studio/dist
 node_modules
+.env.local

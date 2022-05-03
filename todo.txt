@@ -1,0 +1,9 @@
+Before alpha launch
+- Global components for Portable Text
+- Button object/component
+- Individual pages
+
+Quickly needed additions
+- Fix javascript
+- Pagination
+- Gallery object/component
