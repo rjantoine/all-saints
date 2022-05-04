@@ -1,7 +1,8 @@
 .idea
 .vercel
 .next
-public/studio
-studio/dist
+public/admin
+admin/dist
+admin/node_modules
 node_modules
 .env.local
