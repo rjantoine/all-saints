@@ -16,7 +16,7 @@ export default async function handler(req, res) {
         )
         const updatedRoutes = `Updated routes: ${staleRoutes.join(', ')}`
         log(updatedRoutes)
-        return res.status(200).json({ message: updatedRoutes })
+        return res.status(200).json({ success: true, message: updatedRoutes })
     } catch (err) {
         log(err.message, true)
         return res.status(501).json({ error: JSON.stringify(err), message: err.message }).body(JSON.stringify(err))
