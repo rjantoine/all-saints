@@ -1,0 +1,25 @@
+import { isValidRequest } from '@sanity/webhook'
+
+export default async function handler(req, res) {
+    if (!isValidRequest(req, 'ABC')) {
+        const invalidRequest = 'Invalid request'
+        log(invalidRequest, true)
+        return res.status(401).json({ message: invalidRequest })
+    }
+
+    const staleRoutes = ['/']
+
+    console.log("[Next.js] Revalidating...")
+    let revalidate = false
+    try {
+        await Promise.all(
+            staleRoutes.map((route) => res.unstable_revalidate(route))
+        )
+        const updatedRoutes = `Updated routes: ${staleRoutes.join(', ')}`
+        log(updatedRoutes)
+        return res.status(200).json({ message: updatedRoutes })
+    } catch (err) {
+        log(err.message, true)
+        return res.status(500).json({ error: JSON.stringify(err), message: err.message }).body(JSON.stringify(err))
+    }
+}
