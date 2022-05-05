@@ -15,7 +15,7 @@ export default async function handler(req, res) {
             staleRoutes.map((route) => res.unstable_revalidate(route))
         )
         const updatedRoutes = `Updated routes: ${staleRoutes.join(', ')}`
-        return res.status(200).json({ success: true, message: updatedRoutes })
+        return res.status(200).json({ success: true, message: JSON.stringify(req), })
     } catch (err) {
         return res.status(501).json({ error: JSON.stringify(err), message: err.message }).body(JSON.stringify(err))
     }
