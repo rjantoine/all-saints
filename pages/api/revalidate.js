@@ -3,7 +3,6 @@ import { isValidRequest } from '@sanity/webhook'
 export default async function handler(req, res) {
     if (!isValidRequest(req, 'ABC')) {
         const invalidRequest = 'Invalid request'
-        log(invalidRequest, true)
         return res.status(401).json({ message: invalidRequest })
     }
 
