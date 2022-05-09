@@ -28,7 +28,7 @@ export default {
       title: 'Body',
       name: 'body',
       type: 'array',
-      of: [{type: 'section'}, {type: 'hero'}, {type: 'imageTextSection'}, {type: 'mission'}]
+      of: [{type: 'section'}, {type: 'columnsSection'}, {type: 'hero'}, {type: 'imageTextSection'}, {type: 'mission'}, {type: 'quote'}, {type: 'ministriesSection'}]
     }
   ],
 

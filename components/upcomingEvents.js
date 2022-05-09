@@ -21,7 +21,8 @@ export default function UpcomingEvents({events}) {
                         <ul className="event_row">
                             <li>
                                 <div className="event_icon"><img src="/images/calendar.png" alt="" /></div>
-                                <span>{event.startTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true })} - {event.endTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true })}</span>
+                                <span>{event.startTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true })} - {event.endTime ? event.endTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true }) : '?'}
+                                </span>
                             </li>
                             <li>
                                 <div className="event_icon"><img src="/images/location.png" alt="" /></div>
@@ -50,7 +51,7 @@ export default function UpcomingEvents({events}) {
                     <ul className="event_row">
                         <li>
                             <div className="event_icon"><img src="/images/calendar.png" alt="" /></div>
-                            <span>{event.startTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true })} - {event.endTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true })}</span>
+                            <span>{event.startTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true })} - {event.endTime ? event.endTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true }) : '?'}</span>
                         </li>
                         <li>
                             <div className="event_icon"><img src="/images/location.png" alt="" /></div>

@@ -1,18 +1,19 @@
 import client from "../../client"
 import Layout from "../../components/layout"
+import {fetchLayoutProps} from '../../components/layout'
 import HomeBar from '../../components/homeBar'
 import PageSection from '../../components/pageSection'
 import Image from '../../components/sanity/image'
 import {PortableText} from "@portabletext/react"
 import LatestNews from "../../components/latestNews"
 
-export default function News({post, latest}) {
+export default function News({post, latest, layoutProps}) {
     post.publishedAt = new Date(post.publishedAt)
     latest.map(post => {
         post.publishedAt = new Date(post.publishedAt)
     })
 
-    return <Layout title={post.title + ' | News'}>
+    return <Layout title={post.title + ' | News'} layoutProps={layoutProps}>
         <HomeBar title={post.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'News', link: '/news/'}]}/>
         <PageSection title={post.title}>
             <Image value={post.mainImage} width={1170} height={500} style={{width: '100%'}} />
@@ -34,10 +35,13 @@ export default function News({post, latest}) {
 export async function getStaticProps({params: {slug}}) {
     const news = await client.fetch(`*[_type == 'news' && slug.current == "${slug}"]`)
     const latest = await client.fetch(`*[_type == "news"] | order(publishedAt desc)`)
+    const layoutProps = await fetchLayoutProps(client)
+
     return {
         props: {
             post: news[0],
-            latest
+            latest,
+            layoutProps
         }
     }
 }

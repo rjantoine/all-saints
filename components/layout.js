@@ -4,18 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChurch, faEnvelope, faPhone} from '@fortawesome/free-solid-svg-icons'
 
 
-export default function Layout({ title, description, children }) {
+export default function Layout({ title, description, children, layoutProps }) {
     const email = 'info@allsaintsdaincity.ca'
     const phone = '(905) 735-0061'
     const fb = 'https://www.facebook.com/daincitychurch/'
-    const menuItems = [
-        {title: 'Home', link: '/'},
-        {title: 'About', link: '#'},
-        {title: 'Sermons', link: '#'},
-        {title: 'Events', link: '#'},
-        {title: 'Blog', link: '#'},
-        {title: 'Contact', link: '#'}
-    ]
+
+    const menuItems = layoutProps.menuItems
+
     return (
         <>
             <Head>
@@ -79,9 +74,9 @@ export default function Layout({ title, description, children }) {
                                 <div className="col">
                                     <div className="header_content d-flex flex-row align-items-center justify-content-start">
                                         <div className="logo_container">
-                                            <a href="#">
+                                            <a href="/">
                                                 <div className="logo" style={{width: 75}}><FontAwesomeIcon icon={faChurch} style={{height: 60}} /></div>
-                                                <div className="logo_text" style={{verticalAlign: 'inherit'}}>All Saint<br />Anglican Church</div>
+                                                <div className="logo_text" style={{verticalAlign: 'inherit'}}><a href="/" style={{color: 'inherit'}}>All Saint<br />Anglican Church</a></div>
                                             </a>
                                         </div>
                                         <nav className="main_nav_contaner ml-auto">
@@ -130,7 +125,7 @@ export default function Layout({ title, description, children }) {
                         <div className="col-lg-3 footer_col">
                             <div className="footer_column footer_contact_column">
                                 <div className="footer_logo_container">
-                                    <a href="#">
+                                    <a href="/">
                                         <div className="footer_logo_text" style={{lineHeight: 1}}>All Saints<br />Anglican Church</div>
                                     </a>
                                 </div>
@@ -183,4 +178,9 @@ export default function Layout({ title, description, children }) {
             </footer>
         </>
     )
+}
+
+export async function fetchLayoutProps(client) {
+    const menuItems = await client.fetch(`*[_type == 'menuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
+    return {menuItems}
 }

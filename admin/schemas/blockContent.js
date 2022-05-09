@@ -65,12 +65,23 @@ export default {
           name: 'alt',
           title: 'Description',
           type: 'string',
-          description: 'For the visually impaired'
+          description: 'For search engines and the visually impaired'
+        },
+        {
+          name: 'width',
+          title: 'Width',
+          type: 'number'
+        },
+        {
+          name: 'height',
+          title: 'Height',
+          type: 'number'
         }
       ]
     },
     {
       type: 'column'
-    }
+    },
+    { type: 'button' }
   ],
 }

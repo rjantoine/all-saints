@@ -1,5 +1,5 @@
-export default function PageSection({title, subtitle, fullscreen, alt, className='', children}) {
-    return <div className={`section ${className} ${alt ? 'bg-light' : ''}`.trim()}>
+export default function PageSection({title, subtitle, fullscreen, nocolumns=false, alt, className='', children}) {
+    return <div className={`section ${className} ${alt ? 'bg-light' : ''} ${(!title && !subtitle) ? 'pt-0' : ''}`.trim()}>
         <div className="container">
             { (title || subtitle) && <div className="row">
                 <div className="col">
@@ -9,8 +9,11 @@ export default function PageSection({title, subtitle, fullscreen, alt, className
                     </div>
                 </div>
             </div> }
-            {!fullscreen && <div className="row section_row">{children}</div>}
+            {!fullscreen && <div className="row section_row">
+                {!nocolumns && <div className="col">{children}</div>}
+                {nocolumns && children}
+            </div>}
         </div>
-        {fullscreen && <div className="row section_row">{children}</div>}}
+        {fullscreen && <div className="row section_row"><div className="col">{children}</div></div>}
     </div>
 }

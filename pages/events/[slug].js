@@ -1,21 +1,22 @@
 import client from "../../client";
 import Layout from "../../components/layout";
+import {fetchLayoutProps} from '../../components/layout'
 import HomeBar from '../../components/homeBar'
 import PageSection from '../../components/pageSection'
 import Image from '../../components/sanity/image'
 import {PortableText} from "@portabletext/react";
 import UpcomingEvents from '../../components/upcomingEvents'
 
-export default function Event({event, upcoming}) {
-    event.startTime = new Date(event.startTime)
-    event.endTime = new Date(event.endTime)
+export default function Event({event, upcoming, layoutProps}) {
+    event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
+    event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
     upcoming.map(event => {
-        event.startTime = new Date(event.startTime)
-        event.endTime = new Date(event.endTime)
+        event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
+        event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
     })
 
 
-    return <Layout title={event.title + ' | Events'}>
+    return <Layout title={event.title + ' | Events'} layoutProps={layoutProps}>
         <HomeBar title={event.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Events', link: '/events/'}]}/>
         <PageSection>
             <div className="row">
@@ -36,7 +37,7 @@ export default function Event({event, upcoming}) {
                             <ul className="event_row">
                                 <li>
                                     <div className="event_icon"><img src="/images/calendar.png" alt="" /></div>
-                                    <span>{event.startTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true })} - {event.endTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true })}</span>
+                                    <span>{event.startTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true })} - {event.endTime ? event.endTime.toLocaleString('en-CA', { timeStyle: 'short', hour12: true }) : '?'}</span>
                                 </li>
                                 <li>
                                     <div className="event_icon"><img src="/images/location.png" alt="" /></div>
@@ -46,7 +47,7 @@ export default function Event({event, upcoming}) {
                         </div>
                     </div>
 
-                    <div className="event_text mb-4">
+                    <div className="event_text mb-4 portable_text">
                         <PortableText
                             value={event.body}
                         />
@@ -83,11 +84,14 @@ export default function Event({event, upcoming}) {
 
 export async function getStaticProps({params: {slug}}) {
     const events = await client.fetch(`*[_type == 'event' && slug.current == "${slug}"]`)
-    const upcoming = await client.fetch(`*[_type == "event" && startTime > now()] | order(startTime)`)
+    const upcoming = await client.fetch(`*[_type == "event" && endTime > now()] | order(startTime)`)
+    const layoutProps = await fetchLayoutProps(client)
+
     return {
         props: {
             event: events[0],
-            upcoming
+            upcoming,
+            layoutProps
         }
     }
 }

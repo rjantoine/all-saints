@@ -71,7 +71,7 @@ ul
 	list-style: none;
 	margin-bottom: 0px;
 }
-p
+p, .portable_text
 {
 	font-family: 'Assistant', sans-serif;
 	font-size: 16px;
@@ -1766,4 +1766,11 @@ section
 .footer_social ul li a i:hover
 {
 	color: #b10707;
+}
+
+.portable_text ul
+{
+	list-style: disc;
+	margin-top: inherit;
+	margin-left: 2em;
 }

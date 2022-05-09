@@ -1,4 +1,5 @@
 import Layout from '../components/layout'
+import {fetchLayoutProps} from '../components/layout'
 import client from '../client'
 import {PortableText} from "@portabletext/react";
 import hero from "../components/sanity/hero";
@@ -9,10 +10,10 @@ import UpcomingEvents from "../components/upcomingEvents";
 import PageSection from "../components/pageSection";
 import LatestNews from "../components/latestNews";
 
-export default function HomePage({page, events, news}) {
+export default function HomePage({page, events, news, layoutProps}) {
   events.map(event => {
-    event.startTime = new Date(event.startTime)
-    event.endTime = new Date(event.endTime)
+    event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
+    event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
   })
 
   news.map(post => {
@@ -20,8 +21,9 @@ export default function HomePage({page, events, news}) {
   })
 
 
-  return <Layout title={page.title}>
+  return <Layout title={page.title} layoutProps={layoutProps}>
     <div>
+      { JSON.stringify(layoutProps) }
       <PortableText
           value={page.body}
           components={{types:{hero, section, imageTextSection, mission}}}
@@ -39,14 +41,16 @@ export default function HomePage({page, events, news}) {
 
 export async function getStaticProps(context) {
   const pages = await client.fetch(`*[_type == 'page' && slug.current == "index"]`)
-  const events = await client.fetch(`*[_type == "event" && startTime > now()] | order(startTime)[0...3]`)
+  const events = await client.fetch(`*[_type == "event" && endTime > now()] | order(startTime)[0...3]`)
   const news = await client.fetch(`*[_type == "news"] | order(publishedAt desc)[0...3]`)
+  const layoutProps = await fetchLayoutProps(client)
 
   return {
     props: {
       page: pages[0],
       events,
-      news
+      news,
+      layoutProps
     }
   }
 }
