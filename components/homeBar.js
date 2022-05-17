@@ -10,8 +10,7 @@ export default function HomeBar({title, breadcrumbs}) {
         <div className="home_content">
             <div className="container">
                 <div className="row">
-                    <div className="col d-flex flex-row align-items-center justify-content-start">
-                        <div className="home_title">{title}</div>
+                    <div className="col">
                         <div className="breadcrumbs ml-auto">
                             <ul>
                                 { breadcrumbs && breadcrumbs.map(b => <li key={b._id}><Link href={b.link}><a>{b.title}</a></Link></li>) }
