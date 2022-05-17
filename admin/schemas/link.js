@@ -34,6 +34,7 @@ export default {
             description: "Read https://css-tricks.com/use-target_blank/",
             type: "boolean",
             hidden: ({ parent }) => parent?.linkType !== "external", // hidden if link type is not external
+            initialValue: false
         },
         {
             name: "internalLink",
@@ -41,7 +42,6 @@ export default {
             title: "Internal Link",
             hidden: ({ parent }) => parent?.linkType !== "internal", // hidden if link type is not internal
             to: [
-                { type: "news" },
                 { type: "page" },
                 // other types you may want to link to
             ],

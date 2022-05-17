@@ -1,8 +1,8 @@
 import link from './link'
 
 export default {
-  name: 'menuItems',
-  title: 'Menu Items',
+  name: 'mainMenuItems',
+  title: 'Main Menu',
   type: 'document',
   fields: [
     {

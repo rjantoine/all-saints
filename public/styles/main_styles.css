@@ -697,7 +697,7 @@ section
 	color: #FFFFFF;
 	line-height: 1.18;
 }
-.hero_text
+.hero_text, .hero_text p
 {
 	font-size: 18px;
 	color: #FFFFFF;

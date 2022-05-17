@@ -2,14 +2,30 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChurch, faEnvelope, faPhone} from '@fortawesome/free-solid-svg-icons'
+import {PortableTextComponentsProvider} from '@portabletext/react'
+import image from './sanity/image'
+import button from './sanity/button'
+import gallery from './sanity/gallery'
+import column from './column'
+import hero from "./sanity/hero";
+import section from './sanity/section'
+import columnsSection from './sanity/columnsSection'
+import imageTextSection from './sanity/imageTextSection'
+import mission from './sanity/mission'
+import quote from './sanity/quote'
+import DocumentsDisplay from './sanity/documentsDisplay'
 
-
-export default function Layout({ title, description, children, layoutProps }) {
+export default function Layout({ title, description, children, mainMenuItems, footerMenuItems, news, events, ministries}) {
     const email = 'info@allsaintsdaincity.ca'
     const phone = '(905) 735-0061'
     const fb = 'https://www.facebook.com/daincitychurch/'
 
-    const menuItems = layoutProps.menuItems
+    const sanityComponents = {
+        types:{
+            column, image, button, gallery, hero, section, columnsSection, imageTextSection, mission, quote, gallery,
+            documentsDisplay: ({value}) => <DocumentsDisplay value={value} ministries={ministries} news={news} events={events} />
+        }
+    }
 
     return (
         <>
@@ -81,7 +97,7 @@ export default function Layout({ title, description, children, layoutProps }) {
                                         </div>
                                         <nav className="main_nav_contaner ml-auto">
                                             <ul className="main_nav">
-                                                { menuItems.map(({title, link}, i) =>
+                                                { mainMenuItems.map(({title, link}, i) =>
                                                     <li key={`menuItem${i}`}><a href={link}>{title}</a></li>
                                                 )}
                                             </ul>
@@ -118,7 +134,7 @@ export default function Layout({ title, description, children, layoutProps }) {
                     </div>
                 </header>
             </div>
-            <main>{children}</main>
+            <main><PortableTextComponentsProvider components={sanityComponents}>{children}</PortableTextComponentsProvider></main>
             <footer className="footer" style={{backgroundImage: 'url(/images/footer.jpg)'}}>
                 <div className="container">
                     <div className="row">
@@ -149,7 +165,7 @@ export default function Layout({ title, description, children, layoutProps }) {
                             <div className="footer_column footer_links">
                                 <div className="footer_title">useful links</div>
                                 <ul className="footer_links_list">
-                                    { menuItems.map(({title, link}, i) => <li key={`footerItem${i}`}>
+                                    { footerMenuItems.map(({title, link}, i) => <li key={`footerItem${i}`}>
                                         <a href={link}><i className="fa fa-angle-double-right" aria-hidden="true"></i> {title}</a>
                                     </li>)}
                                 </ul>
@@ -180,7 +196,12 @@ export default function Layout({ title, description, children, layoutProps }) {
     )
 }
 
-export async function fetchLayoutProps(client) {
-    const menuItems = await client.fetch(`*[_type == 'menuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
-    return {menuItems}
+export async function fetchGlobalProps(client) {
+    const mainMenuItems = await client.fetch(`*[_type == 'mainMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
+    const footerMenuItems = await client.fetch(`*[_type == 'footerMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
+    const events = await client.fetch(`*[_type == "event" && endTime > now()] | order(startTime)[0...3]`)
+    const news = await client.fetch(`*[_type == "news"] | order(publishedAt desc)[0...3]`)
+    const ministries = await client.fetch(`*[_type == "ministry"]| order(order asc)`)
+
+    return {mainMenuItems, footerMenuItems, events, news, ministries}
 }

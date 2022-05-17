@@ -82,6 +82,8 @@ export default {
     {
       type: 'column'
     },
-    { type: 'button' }
+    { type: 'button' },
+    {type: 'gallery'},
+    {type: 'documentsDisplay'}
   ],
 }

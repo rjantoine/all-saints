@@ -7,7 +7,7 @@ export default function UpcomingEvents({events}) {
     return <div className="container-fluid">
         <div className="row pl-md-5">
             { events.map((event, i) => <div key={event._id} className="col col-12 col-md-6 col-xl-4 pr-md-5">
-                <Link href={`/events/${event.slug.current}`}><a><Image value={event.mainImage} width={690} height={345} style={{width: '100%'}} /></a></Link>
+                <Link href={`/events/${event.slug.current}`}><a><Image value={event.mainImage} width={690} height={345} style={{width: '100%'}} loading="lazy" /></a></Link>
                 <div className="row mt-0 mt-md-3 mb-5">
                     <div className="col-3 text-center">
                         <div className="py-3" style={{background: '#b10707'}}>

@@ -11,7 +11,8 @@ import news from './news'
 import author from './author'
 import event from './event'
 import page from './page'
-import menu from './menu'
+import mainMenu from './mainMenu'
+import footerMenu from './footerMenu'
 import section from './section'
 import columnsSection from './columnsSection'
 import hero from './hero'
@@ -21,7 +22,8 @@ import mission from './mission'
 import button from './button'
 import quote from './quote'
 import ministry from './ministry'
-import ministriesSection from './ministriesSection'
+import documentsDisplay from './documentsDisplay'
+import gallery from './gallery'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -36,7 +38,8 @@ export default createSchema({
     event,
     news,
     ministry,
-    menu,
+    mainMenu,
+    footerMenu,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
     blockContent,
@@ -48,6 +51,7 @@ export default createSchema({
     mission,
     button,
     quote,
-    ministriesSection
+    documentsDisplay,
+    gallery
   ]),
 })

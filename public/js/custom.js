@@ -202,7 +202,8 @@ $(document).ready(function()
 			{
 				rel:'colorbox',
 				photo: true,
-				maxWidth: '90%'
+				maxWidth: '90%',
+				maxHeight: '90%'
 			});
 		}
 	}

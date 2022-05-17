@@ -1,37 +1,39 @@
 import client from "../../client";
-import Layout from "../../components/layout";
-import {fetchLayoutProps} from '../../components/layout'
-import HomeBar from '../../components/homeBar'
-import PageSection from '../../components/pageSection'
-import Image from '../../components/sanity/image'
+import Layout from "@/components/layout";
+import {fetchGlobalProps} from '@/components/layout'
+import HomeBar from '@/components/homeBar'
+import PageSection from '@/components/pageSection'
+import Image from '@/components/sanity/image'
 import {PortableText} from "@portabletext/react";
-import MinistriesSection from '../../components/sanity/ministriesSection'
+import MinistriesSection from '@/components/sanity/ministriesSection'
 
-export default function Ministry({ministry, ministries, layoutProps}) {
-    return <Layout title={ministry.title + ' | Ministries'} layoutProps={layoutProps}>
+export default function Ministry({ministry, ministries, ...globalProps}) {
+    return <Layout title={ministry.title + ' | Ministries'} {...globalProps}>
         <HomeBar title={ministry.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Ministries', link: '/ministries'}]}/>
         <PageSection title={ministry.title}>
-            <Image value={ministry.mainImage} width={1170} height={500} style={{width: '100%'}} />
+            <Image value={ministry.mainImage} width={1170} height={500} fit="max" style={{width: '100%'}} className="mb-5" />
             <PortableText
                 value={ministry.body}
             />
         </PageSection>
         <PageSection title="Our Ministries" alt>
-            <MinistriesSection value={{ministries}} />
+            <div class="row">
+                <div className="col-12">
+                    <MinistriesSection ministries={ministries} />
+                </div>
+            </div>
         </PageSection>
     </Layout>
 }
 
 export async function getStaticProps({params: {slug}}) {
     const ministry = (await client.fetch(`*[_type == 'ministry' && slug.current == "${slug}"]`))[0]
-    const ministries = await client.fetch(`*[_type == "ministry"]`)
-    const layoutProps = await fetchLayoutProps(client)
+    const globalProps = await fetchGlobalProps(client)
 
     return {
         props: {
             ministry,
-            ministries,
-            layoutProps
+            ...globalProps
         }
     }
 }

@@ -1,4 +1,5 @@
 import {urlFor} from '../../helpers'
+import {PortableText} from "@portabletext/react";
 
 export default function Hero({value: {title, description, backgroundImage, buttonLink, buttonTitle}}) {
     return <div className="hero">
@@ -11,7 +12,7 @@ export default function Hero({value: {title, description, backgroundImage, butto
                 <div className="row">
                     <div className="col">
                         <div className="hero_title">{title}</div>
-                        <div className="hero_text">{description}</div>
+                        <div className="hero_text"><PortableText value={description} /></div>
                         <div className="button hero_link"><a href={buttonLink}>{buttonTitle}</a></div>
                     </div>
                 </div>
