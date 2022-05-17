@@ -1,22 +1,22 @@
 import client from "../../client";
-import Layout from "../../components/layout";
-import {fetchLayoutProps} from '../../components/layout'
-import HomeBar from '../../components/homeBar'
-import PageSection from '../../components/pageSection'
-import Image from '../../components/sanity/image'
+import Layout from "@/components/layout";
+import {fetchGlobalProps} from '@/components/layout'
+import HomeBar from '@/components/homeBar'
+import PageSection from '@/components/pageSection'
+import Image from '@/components/sanity/image'
 import {PortableText} from "@portabletext/react";
-import UpcomingEvents from '../../components/upcomingEvents'
+import UpcomingEvents from '@/components/upcomingEvents'
 
-export default function Event({event, upcoming, layoutProps}) {
+export default function Event({event, events, ...globalProps}) {
     event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
     event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
-    upcoming.map(event => {
+    events.map(event => {
         event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
         event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
     })
 
 
-    return <Layout title={event.title + ' | Events'} layoutProps={layoutProps}>
+    return <Layout title={event.title + ' | Events'} {...globalProps}>
         <HomeBar title={event.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Events', link: '/events/'}]}/>
         <PageSection>
             <div className="row">
@@ -84,14 +84,13 @@ export default function Event({event, upcoming, layoutProps}) {
 
 export async function getStaticProps({params: {slug}}) {
     const events = await client.fetch(`*[_type == 'event' && slug.current == "${slug}"]`)
-    const upcoming = await client.fetch(`*[_type == "event" && endTime > now()] | order(startTime)`)
-    const layoutProps = await fetchLayoutProps(client)
+    const globalProps = await fetchGlobalProps(client)
+
 
     return {
         props: {
             event: events[0],
-            upcoming,
-            layoutProps
+            ...globalProps
         }
     }
 }
