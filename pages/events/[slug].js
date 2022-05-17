@@ -77,7 +77,7 @@ export default function Event({event, events, ...globalProps}) {
             </div>
         </PageSection>
         <PageSection title="Upcoming Events" fullscreen alt>
-            <UpcomingEvents events={upcoming} />
+            <UpcomingEvents events={events} />
         </PageSection>
     </Layout>
 }
