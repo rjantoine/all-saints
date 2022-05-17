@@ -19,7 +19,7 @@ export default function Event({event, events, ...globalProps}) {
     return <Layout title={event.title + ' | Events'} {...globalProps}>
         <HomeBar title={event.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Events', link: '/events/'}]}/>
         <PageSection>
-            <div className="row">
+            <div className="row mt-5">
                 <div className="col-lg-6">
                     <div className="upcoming_image"><Image value={event.mainImage} width={690} height={460} style={{width: '100%'}}/></div>
                 </div>
@@ -54,7 +54,7 @@ export default function Event({event, events, ...globalProps}) {
                     </div>
 
                     <div className="event_timer_container ml-lg-auto">
-                        <ul className="event_timer">
+                        <ul className="event_timer" data-event-time={event.startTime}>
                             <li>
                                 <div id="day" className="event_num">00</div>
                                 <div className="event_ss">day</div>

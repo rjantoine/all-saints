@@ -14,6 +14,26 @@
 
 ******************************/
 
+function waitForElm(selector) {
+	return new Promise(resolve => {
+		if (document.querySelector(selector)) {
+			return resolve(document.querySelector(selector));
+		}
+
+		const observer = new MutationObserver(mutations => {
+			if (document.querySelector(selector)) {
+				resolve(document.querySelector(selector));
+				observer.disconnect();
+			}
+		});
+
+		observer.observe(document.body, {
+			childList: true,
+			subtree: true
+		});
+	});
+}
+
 $(document).ready(function()
 {
 	"use strict";
@@ -143,17 +163,17 @@ $(document).ready(function()
 
 	function initTimer()
 	{
-		if($('.event_timer').length)
-    	{
-    		// Uncomment line below and replace date
-	    	// var target_date = new Date("April 7, 2018").getTime();
+		waitForElm('.event_timer').then((elm) => {
+			// Uncomment line below and replace date
+			// var target_date = new Date("April 7, 2018").getTime();
+			let target_date = new Date(elm.dataset.eventTime).getTime()
 
-	    	// comment lines below
-	    	var date = new Date();
-	    	date.setDate(date.getDate() + 3);
-	    	var target_date = date.getTime();
-	    	//----------------------------------------
-	 
+			// comment lines below
+			// var date = new Date();
+			// date.setDate(date.getDate() + 3);
+			// var target_date = date.getTime();
+			//----------------------------------------
+
 			// variables for time units
 			var days, hours, minutes, seconds;
 
@@ -162,30 +182,29 @@ $(document).ready(function()
 			var m = $('#minute');
 			var s = $('#second');
 
-			setInterval(function ()
-			{
-			    // find the amount of "seconds" between now and target
-			    var current_date = new Date().getTime();
-			    var seconds_left = (target_date - current_date) / 1000;
-			 
-			    // do some time calculations
-			    days = parseInt(seconds_left / 86400);
-			    seconds_left = seconds_left % 86400;
-			     
-			    hours = parseInt(seconds_left / 3600);
-			    seconds_left = seconds_left % 3600;
-			     
-			    minutes = parseInt(seconds_left / 60);
-			    seconds = parseInt(seconds_left % 60);
+			setInterval(function () {
+				// find the amount of "seconds" between now and target
+				var current_date = new Date().getTime();
+				var seconds_left = (target_date - current_date) / 1000;
 
-			    // display result
-			    d.text(days);
-			    h.text(hours);
-			    m.text(minutes);
-			    s.text(seconds); 
-			 
+				// do some time calculations
+				days = parseInt(seconds_left / 86400);
+				seconds_left = seconds_left % 86400;
+
+				hours = parseInt(seconds_left / 3600);
+				seconds_left = seconds_left % 3600;
+
+				minutes = parseInt(seconds_left / 60);
+				seconds = parseInt(seconds_left % 60);
+
+				// display result
+				d.text(days);
+				h.text(hours);
+				m.text(minutes);
+				s.text(seconds);
+
 			}, 1000);
-    	}	
+		})
 	}
 
 	/*
