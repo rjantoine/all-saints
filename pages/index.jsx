@@ -12,7 +12,7 @@ import LatestNews from "../components/latestNews";
 import Gallery from "../components/sanity/gallery"
 
 export default function HomePage({page, events, news, ...globalProps}) {
-    events.map(event => {
+  events.map(event => {
     event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
     event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
   })
@@ -20,7 +20,6 @@ export default function HomePage({page, events, news, ...globalProps}) {
   news.map(post => {
     post.publishedAt = new Date(post.publishedAt)
   })
-
 
   return <Layout title={page.title} {...globalProps} >
     <div>
@@ -37,9 +36,14 @@ export default function HomePage({page, events, news, ...globalProps}) {
   </Layout>
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(ctx) {
   const pages = await client.fetch(`*[_type == 'page' && slug.current == "index"]`)
   const globalProps = await fetchGlobalProps(client)
+
+  // const currentPage = ctx.params.currentPage || 0
+  // const qtyPerPage = 3
+  // const min = currentPage * qtyPerPage
+  // const max = min + qtyPerPage
 
   return {
     props: {

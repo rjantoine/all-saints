@@ -1774,3 +1774,27 @@ section
 	margin-top: inherit;
 	margin-left: 2em;
 }
+
+.page-link {
+	color: white;
+	background-color: #b10707;
+	border: 1px solid white;
+}
+
+.page-link:focus, .page-link:hover, .page-link.current, .page-link.disabled {
+	color: #b10707;
+	border-color: white;
+	background-color: #e9ecef;
+}
+
+.carousel-indicators li{
+	background-color: #b10707;
+}
+
+.carousel-indicators li.active{
+	background-color: #c0c0c0;
+}
+
+.page-link.disabled {
+	color: #333;
+}

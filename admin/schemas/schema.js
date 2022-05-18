@@ -20,10 +20,12 @@ import column from './column'
 import imageTextSection from './imageTextSection'
 import mission from './mission'
 import button from './button'
+import linkButton from './linkButton'
 import quote from './quote'
 import ministry from './ministry'
 import documentsDisplay from './documentsDisplay'
 import gallery from './gallery'
+import link from './link'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -50,8 +52,10 @@ export default createSchema({
     imageTextSection,
     mission,
     button,
+    linkButton,
     quote,
     documentsDisplay,
-    gallery
+    gallery,
+    link
   ]),
 })

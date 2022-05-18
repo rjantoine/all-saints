@@ -22,11 +22,10 @@ export default {
             name: "href",
             type: "url",
             hidden: ({ parent }) => parent?.linkType !== "external", // hidden if link type is not external
-            validation: (Rule) =>
-                Rule.uri({
-                    allowRelative: true,
-                    scheme: ["https", "http", "mailto", "tel"],
-                }),
+            validation: Rule => Rule.uri({
+                allowRelative: true,
+                scheme: ['http', 'https', 'mailto', 'tel']
+            })
         },
         {
             title: "Open in new tab?",
@@ -43,6 +42,9 @@ export default {
             hidden: ({ parent }) => parent?.linkType !== "internal", // hidden if link type is not internal
             to: [
                 { type: "page" },
+                { type: "news" },
+                { type: "event" },
+                { type: "ministry" },
                 // other types you may want to link to
             ],
         },

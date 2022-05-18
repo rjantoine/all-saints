@@ -1,7 +1,7 @@
 export default function Mission({value: {missionText, communityText, beliefText}}) {
     return <div style={{backgroundImage: 'url(images/mission.jpg)'}}>
-        <div class="row">
-            <div class="col col-12 col-md-4 p-5 text-center">
+        <div className="row">
+            <div className="col col-12 col-md-4 p-5 text-center">
                 <div className="mission_icon"><i className="fa fa-bell-o" aria-hidden="true"></i></div>
                 <div className="mission_title">our mission</div>
                 <div className="mission_text">

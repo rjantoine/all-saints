@@ -8,6 +8,9 @@
  *    type: 'blockContent'
  *  }
  */
+
+import link from './link'
+
 export default {
   title: 'Block Content',
   name: 'blockContent',
@@ -39,18 +42,7 @@ export default {
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
-          {
-            title: 'URL',
-            name: 'link',
-            type: 'object',
-            fields: [
-              {
-                title: 'URL',
-                name: 'href',
-                type: 'url',
-              },
-            ],
-          },
+            link
         ],
       },
     },
@@ -83,6 +75,7 @@ export default {
       type: 'column'
     },
     { type: 'button' },
+    { type: 'linkButton' },
     {type: 'gallery'},
     {type: 'documentsDisplay'}
   ],

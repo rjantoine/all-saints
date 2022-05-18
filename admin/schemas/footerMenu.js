@@ -1,5 +1,3 @@
-import link from './link'
-
 export default {
   name: 'footerMenuItems',
   title: 'Footer Menu',
@@ -10,7 +8,11 @@ export default {
       title: 'Title',
       type: 'string',
     },
-    link,
+    {
+      name: 'link',
+      title: 'Link',
+      type: 'link'
+    },
     {
       name: "order",
       title: "Order",

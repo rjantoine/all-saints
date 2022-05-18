@@ -53,7 +53,7 @@ export default function Event({event, events, ...globalProps}) {
                         />
                     </div>
 
-                    <div className="event_timer_container ml-lg-auto">
+                    <div className="event_timer_container d-flex justify-content-center">
                         <ul className="event_timer" data-event-time={event.startTime}>
                             <li>
                                 <div id="day" className="event_num">00</div>

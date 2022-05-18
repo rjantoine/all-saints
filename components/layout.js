@@ -5,6 +5,7 @@ import {faChurch, faEnvelope, faPhone} from '@fortawesome/free-solid-svg-icons'
 import {PortableTextComponentsProvider} from '@portabletext/react'
 import image from './sanity/image'
 import button from './sanity/button'
+import linkButton from './sanity/linkButton'
 import gallery from './sanity/gallery'
 import column from './column'
 import hero from "./sanity/hero";
@@ -22,7 +23,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
 
     const sanityComponents = {
         types:{
-            column, image, button, gallery, hero, section, columnsSection, imageTextSection, mission, quote, gallery,
+            column, image, button, linkButton, gallery, hero, section, columnsSection, imageTextSection, mission, quote, gallery,
             documentsDisplay: ({value}) => <DocumentsDisplay value={value} ministries={ministries} news={news} events={events} />
         }
     }
@@ -199,7 +200,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
 export async function fetchGlobalProps(client) {
     const mainMenuItems = await client.fetch(`*[_type == 'mainMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
     const footerMenuItems = await client.fetch(`*[_type == 'footerMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
-    const events = await client.fetch(`*[_type == "event" && endTime > now()] | order(startTime)[0...3]`)
+    const events = await client.fetch(`*[_type == "event" && endTime > now()] | order(startTime)`)
     const news = await client.fetch(`*[_type == "news"] | order(publishedAt desc)[0...3]`)
     const ministries = await client.fetch(`*[_type == "ministry"]| order(order asc)`)
 

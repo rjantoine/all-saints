@@ -1,6 +1,6 @@
 export default {
-    name: 'button',
-    title: 'Button',
+    name: 'linkButton',
+    title: 'Link Button',
     type: 'object',
     fields: [
         {
@@ -16,8 +16,7 @@ export default {
         {
             name: 'link',
             title: 'Link',
-            type: 'url',
-            validation: Rule => Rule.uri({allowRelative: true})
+            type: 'link',
         },
     ],
     preview: {
@@ -26,7 +25,7 @@ export default {
         },
         prepare({text}) {
             return {
-                title: `[Button] ${text}`,
+                title: `[Link Button] ${text}`,
             }
         },
     },
