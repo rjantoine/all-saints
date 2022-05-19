@@ -11,6 +11,8 @@ import PageSection from "../components/pageSection";
 import LatestNews from "../components/latestNews";
 import Gallery from "../components/sanity/gallery"
 
+import Carousel from '../components/carousel'
+
 export default function HomePage({page, events, news, ...globalProps}) {
   events.map(event => {
     event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
@@ -28,10 +30,9 @@ export default function HomePage({page, events, news, ...globalProps}) {
         <UpcomingEvents events={events} />
       </PageSection>
 
-      <PageSection className="latest_news" title="Latest News" subtitle="Be part of a community of people experiencing God together." nocolumns>
+      <PageSection className="latest_news" title="Latest News" subtitle="Be part of a community of people experiencing God together." fullscreen>
         <LatestNews news={news} />
       </PageSection>
-
     </div>
   </Layout>
 }

@@ -201,7 +201,7 @@ export async function fetchGlobalProps(client) {
     const mainMenuItems = await client.fetch(`*[_type == 'mainMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
     const footerMenuItems = await client.fetch(`*[_type == 'footerMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
     const events = await client.fetch(`*[_type == "event" && endTime > now()] | order(startTime)`)
-    const news = await client.fetch(`*[_type == "news"] | order(publishedAt desc)[0...3]`)
+    const news = await client.fetch(`*[_type == "news"] | order(publishedAt desc)`)
     const ministries = await client.fetch(`*[_type == "ministry"]| order(order asc)`)
 
     return {mainMenuItems, footerMenuItems, events, news, ministries}

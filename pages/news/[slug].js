@@ -25,8 +25,8 @@ export default function News({post, news, ...globalProps}) {
                 value={post.body}
             />
         </PageSection>
-        <PageSection className="latest_news" title="Latest News" subtitle="Be part of a community of people experiencing God together." nocolumns>
-            <LatestNews news={news} />
+        <PageSection className="latest_news" title="Latest News" subtitle="Be part of a community of people experiencing God together." fullscreen>
+            <LatestNews news={news} itemsPerPage={6} />
         </PageSection>
 
     </Layout>
