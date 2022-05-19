@@ -11,7 +11,7 @@ export default function UpcomingEvents({events, itemsPerPage=3}) {
         <Pagination items={events} itemsPerPage={itemsPerPage}
             itemComponent={event => <div key={event._id} className="col col-12 col-md-6 col-xl-4 pr-md-5 mb-5">
                 <div className="bg-light">
-                    <Link href={`/events/${event.slug.current}`}><a><Image className="bg-white" value={event.mainImage} width={690} height={345} style={{width: '100%'}} loading="lazy" /></a></Link>
+                    <Link href={`/events/${event.slug.current}`}><a><Image className="bg-white" value={event.mainImage} width={690} height={345} style={{width: '100%'}} /></a></Link>
                     <div className="row mt-0">
                         <div className="col-3 text-center">
                             <div className="py-4 py-md-3" style={{background: '#b10707'}}>

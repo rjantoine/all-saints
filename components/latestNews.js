@@ -11,7 +11,7 @@ export default function LatestNews({news, itemsPerPage=3}) {
         itemComponent={post => <div key={post._id} className="col-xl-4 col-lg-6 news_post_col">
             <div className="news_post">
                 <div className="news_image">
-                    <Link href={'/news/'+post.slug.current}><a><Image value={post.mainImage} width={690} height={503} loading="lazy" /></a></Link>
+                    <Link href={'/news/'+post.slug.current}><a><Image value={post.mainImage} width={690} height={503} /></a></Link>
                 </div>
                 <div className="news_post_content">
                     <div className="news_post_title">
