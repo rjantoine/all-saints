@@ -34,8 +34,9 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                 <title>{title} | All Saints Anglican Church - Dain City</title>
                 <meta charSet="utf-8" />
                 <meta name="description" content={description} />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css" />
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+                {/*<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css" />*/}
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossOrigin="anonymous" />
                 <link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
                 <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
                 <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
@@ -43,9 +44,11 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                 <link href="/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css" />
                 <link rel="stylesheet" type="text/css" href="/styles/main_styles.css" />
                 <link rel="stylesheet" type="text/css" href="/styles/responsive.css"/>
-                <script defer src="/js/jquery-3.2.1.min.js"></script>
-                <script defer src="/styles/bootstrap4/popper.js"></script>
-                <script defer src="/styles/bootstrap4/bootstrap.min.js"></script>
+                {/*<script defer src="/js/jquery-3.2.1.min.js"></script>*/}
+                {/*<script defer src="/styles/bootstrap4/popper.js"></script>*/}
+                {/*<script defer src="/styles/bootstrap4/bootstrap.min.js"></script>*/}
+                <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossOrigin="anonymous" />
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossOrigin="anonymous" />
                 <script defer src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
                 <script defer src="/plugins/easing/easing.js"></script>
                 <script defer src="/plugins/parallax-js-master/parallax.min.js"></script>
