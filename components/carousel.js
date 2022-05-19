@@ -1,6 +1,6 @@
 export default function Carousel({carouselPages=[]}) {
     const cId = Date.now();
-    return <div id={`carousel-${cId}`} className="carousel slide" data-ride="carousel">
+    return <div id={`carousel-${cId}`} className="carousel slide" data-ride="carousel" data-touch="true">
         <ol className="carousel-indicators">
             { [...Array(carouselPages.length).keys()].map(i => <li data-target={`#carousel-${cId}`} data-slide-to={i} className={i == 0 ? 'active' : ''}></li>)}
         </ol>
