@@ -93,15 +93,15 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                         </div>
                     </div>
                     <div className="header_container">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col">
+                        <div className="">
+                            <div className="row justify-content-center">
+                                <div className="col col-10">
                                     <div className="header_content d-flex flex-row align-items-center justify-content-start">
                                         <div className="logo_container">
-                                            <div className="logo" style={{width: 75}}><a href="/"><FontAwesomeIcon icon={faChurch} style={{height: 60}} /></a></div>
-                                            <div className="logo_text" style={{verticalAlign: 'inherit'}}><a href="/" style={{color: 'inherit'}}>All Saint<br />Anglican Church</a></div>
+                                            <div className="logo mx-2" style={{width: 75}}><a href="/"><FontAwesomeIcon icon={faChurch} style={{height: 60}} color="#b10707" /></a></div>
+                                            <div className="logo_text mx-2" style={{verticalAlign: 'center'}}><a href="/" style={{color: 'inherit'}}>All Saint<br />Anglican Church</a></div>
                                         </div>
-                                        <nav className="main_nav_contaner ml-auto">
+                                        <nav className="main_nav_contaner mx-auto text-center">
                                             <ul className="main_nav">
                                                 { mainMenuItems.map(({title, link}, i) =>
                                                     <li key={`menuItem${i}`}><a href={link}>{title}</a></li>
