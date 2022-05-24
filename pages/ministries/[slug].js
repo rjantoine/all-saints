@@ -6,6 +6,7 @@ import PageSection from '@/components/pageSection'
 import Image from '@/components/sanity/image'
 import {PortableText} from "@portabletext/react";
 import MinistriesSection from '@/components/sanity/ministriesSection'
+import {groqLinkProjection} from '@/components/sanity/link'
 
 export default function Ministry({ministry, ministries, ...globalProps}) {
     return <Layout title={ministry.title + ' | Ministries'} {...globalProps}>
@@ -27,7 +28,7 @@ export default function Ministry({ministry, ministries, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const ministry = (await client.fetch(`*[_type == 'ministry' && slug.current == "${slug}"]`))[0]
+    const ministry = (await client.fetch(`*[_type == 'ministry' && slug.current == "${slug}"]{${groqLinkProjection}}`))[0]
     const globalProps = await fetchGlobalProps(client)
 
     return {

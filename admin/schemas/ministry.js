@@ -1,6 +1,6 @@
 export default {
   name: 'ministry',
-  title: 'Ministry',
+  title: 'Ministries',
   type: 'document',
   fields: [
     {

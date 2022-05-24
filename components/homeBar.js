@@ -13,8 +13,8 @@ export default function HomeBar({title, breadcrumbs}) {
                     <div className="col">
                         <div className="breadcrumbs ml-auto">
                             <ul>
-                                { breadcrumbs && breadcrumbs.map(b => <li key={b._id}><Link href={b.link}><a>{b.title}</a></Link></li>) }
-                                <li>{title}</li>
+                                { breadcrumbs && breadcrumbs.map(b => <li key={`breadcrumb-${b._id}`}><Link href={b.link}><a>{b.title}</a></Link></li>) }
+                                <li key="breadcrumb-title">{title}</li>
                             </ul>
                         </div>
                     </div>

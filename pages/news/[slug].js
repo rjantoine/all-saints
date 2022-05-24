@@ -6,6 +6,7 @@ import PageSection from '../../components/pageSection'
 import Image from '../../components/sanity/image'
 import {PortableText} from "@portabletext/react"
 import LatestNews from "../../components/latestNews"
+import {groqLinkProjection} from '@/components/sanity/link'
 
 export default function News({post, news, ...globalProps}) {
     post.publishedAt = new Date(post.publishedAt)
@@ -26,14 +27,14 @@ export default function News({post, news, ...globalProps}) {
             />
         </PageSection>
         <PageSection className="latest_news" title="Latest News" subtitle="Be part of a community of people experiencing God together." fullscreen>
-            <LatestNews news={news} itemsPerPage={6} />
+            <LatestNews news={news} rows={2} />
         </PageSection>
 
     </Layout>
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const news = await client.fetch(`*[_type == 'news' && slug.current == "${slug}"]`)
+    const news = await client.fetch(`*[_type == 'news' && slug.current == "${slug}"]{${groqLinkProjection}}`)
     const globalProps = await fetchGlobalProps(client)
 
     return {

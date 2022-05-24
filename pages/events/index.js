@@ -16,7 +16,7 @@ export default function EventIndex({events, ...globalProps}) {
     return <Layout title="Events" {...globalProps}>
         <HomeBar title="Events" breadcrumbs={[{title:'Home', link:'/'}]}/>
         <PageSection title="Upcoming Events" fullscreen alt>
-            <UpcomingEvents events={events} itemsPerPage={6} />
+            <div className="mx-5"><UpcomingEvents events={events} itemsPerPage={6} /></div>
         </PageSection>
     </Layout>
 }

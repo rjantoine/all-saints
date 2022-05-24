@@ -24,6 +24,13 @@ export default {
             type: 'string',
         },
         {
+            name: 'fullscreen',
+            title: 'Full Screen',
+            description: 'Do you want the content to go all the way to the edge of the screen?',
+            type: 'boolean',
+            initialValue: false
+        },
+        {
             name: 'body',
             title: 'Body',
             type: 'blockContent',

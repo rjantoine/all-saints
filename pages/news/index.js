@@ -14,8 +14,8 @@ export default function News({latest, ...globalProps}) {
 
     return <Layout title={'News'} {...globalProps}>
         <HomeBar title="News" breadcrumbs={[{title:'Home', link:'/'}]}/>
-        <PageSection className="latest_news" title="Latest News" subtitle="Be part of a community of people experiencing God together." fullscreen>
-            <LatestNews news={latest} itemsPerPage={6} />
+        <PageSection className="latest_news" title="Latest News" subtitle="Be part of a community of people experiencing God together.">
+            <LatestNews news={latest} />
         </PageSection>
     </Layout>
 }

@@ -21,6 +21,17 @@ export default {
                     {title: "Ministries", value: "ministries"}
                 ],
             }
+        },
+        {
+            name: 'displayStyle',
+            title: 'Display Style',
+            type: 'string',
+            options: {
+                list: [
+                    {title: "Pagination", value: "pagination"},
+                    {title: "Carousel", value: "carousel"},
+                ],
+            }
         }
     ],
     preview: {

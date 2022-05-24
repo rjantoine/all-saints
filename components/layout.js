@@ -14,6 +14,7 @@ import columnsSection from './sanity/columnsSection'
 import imageTextSection from './sanity/imageTextSection'
 import mission from './sanity/mission'
 import quote from './sanity/quote'
+import sanityLink from './sanity/link'
 import DocumentsDisplay from './sanity/documentsDisplay'
 
 export default function Layout({ title, description, children, mainMenuItems, footerMenuItems, news, events, ministries}) {
@@ -25,6 +26,9 @@ export default function Layout({ title, description, children, mainMenuItems, fo
         types:{
             column, image, button, linkButton, gallery, hero, section, columnsSection, imageTextSection, mission, quote, gallery,
             documentsDisplay: ({value}) => <DocumentsDisplay value={value} ministries={ministries} news={news} events={events} />
+        },
+        marks: {
+            link: sanityLink,
         }
     }
 
@@ -50,7 +54,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossOrigin="anonymous" />
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossOrigin="anonymous" />
                 <script defer src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-                <script defer src="/plugins/easing/easing.js"></script>
+                {/*<script defer src="/plugins/easing/easing.js"></script>*/}
                 <script defer src="/plugins/parallax-js-master/parallax.min.js"></script>
                 <script defer src="/plugins/colorbox/jquery.colorbox-min.js"></script>
                 <script defer src="/js/custom.js"></script>
@@ -94,10 +98,8 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                                 <div className="col">
                                     <div className="header_content d-flex flex-row align-items-center justify-content-start">
                                         <div className="logo_container">
-                                            <a href="/">
-                                                <div className="logo" style={{width: 75}}><FontAwesomeIcon icon={faChurch} style={{height: 60}} /></div>
-                                                <div className="logo_text" style={{verticalAlign: 'inherit'}}><a href="/" style={{color: 'inherit'}}>All Saint<br />Anglican Church</a></div>
-                                            </a>
+                                            <div className="logo" style={{width: 75}}><a href="/"><FontAwesomeIcon icon={faChurch} style={{height: 60}} /></a></div>
+                                            <div className="logo_text" style={{verticalAlign: 'inherit'}}><a href="/" style={{color: 'inherit'}}>All Saint<br />Anglican Church</a></div>
                                         </div>
                                         <nav className="main_nav_contaner ml-auto">
                                             <ul className="main_nav">
@@ -142,7 +144,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
             <footer className="footer" style={{backgroundImage: 'url(/images/footer.jpg)'}}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 footer_col">
+                        <div className="col-lg-4 footer_col">
                             <div className="footer_column footer_contact_column">
                                 <div className="footer_logo_container">
                                     <a href="/">
@@ -153,7 +155,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                                     <ul>
                                         <li>
                                             <div><i className="fa fa-map-marker" aria-hidden="true"></i></div>
-                                            <span>80 Forks Road East, Welland, ON, L3B 5K5</span></li>
+                                            <span>80 Forks Road East, Welland, ON, L3B&nbsp;5K5</span></li>
                                         <li>
                                             <div><i className="fa fa-phone" aria-hidden="true"></i></div>
                                             <span>{phone}</span></li>
@@ -165,7 +167,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                             </div>
                         </div>
 
-                        <div className="col-lg-9 footer_col">
+                        <div className="col-lg-8 footer_col">
                             <div className="footer_column footer_links">
                                 <div className="footer_title">useful links</div>
                                 <ul className="footer_links_list">
@@ -203,7 +205,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
 export async function fetchGlobalProps(client) {
     const mainMenuItems = await client.fetch(`*[_type == 'mainMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
     const footerMenuItems = await client.fetch(`*[_type == 'footerMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
-    const events = await client.fetch(`*[_type == "event" && endTime > now()] | order(startTime)`)
+    const events = await client.fetch(`*[_type == "event" && (startTime > now() || endTime > now())] | order(startTime)`)
     const news = await client.fetch(`*[_type == "news"] | order(publishedAt desc)`)
     const ministries = await client.fetch(`*[_type == "ministry"]| order(order asc)`)
 

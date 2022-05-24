@@ -6,6 +6,7 @@ import PageSection from '@/components/pageSection'
 import Image from '@/components/sanity/image'
 import {PortableText} from "@portabletext/react";
 import UpcomingEvents from '@/components/upcomingEvents'
+import {groqLinkProjection} from '@/components/sanity/link'
 
 export default function Event({event, events, ...globalProps}) {
     event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
@@ -83,7 +84,7 @@ export default function Event({event, events, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const events = await client.fetch(`*[_type == 'event' && slug.current == "${slug}"]`)
+    const events = await client.fetch(`*[_type == 'event' && slug.current == "${slug}"]{${groqLinkProjection}}`)
     const globalProps = await fetchGlobalProps(client)
 
 

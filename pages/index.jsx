@@ -10,6 +10,7 @@ import UpcomingEvents from "../components/upcomingEvents";
 import PageSection from "../components/pageSection";
 import LatestNews from "../components/latestNews";
 import Gallery from "../components/sanity/gallery"
+import {groqLinkProjection} from '@/components/sanity/link'
 
 import Carousel from '../components/carousel'
 
@@ -23,22 +24,22 @@ export default function HomePage({page, events, news, ...globalProps}) {
     post.publishedAt = new Date(post.publishedAt)
   })
 
-  return <Layout title={page.title} {...globalProps} >
+  return <Layout title={page.title} events={events} news={news} {...globalProps} >
     <div>
       <PortableText value={page.body} />
-      <PageSection className="events" title="Upcoming events" subtitle="Experience God's Presence" fullscreen>
-        <UpcomingEvents events={events} />
-      </PageSection>
+      {/*<PageSection className="events" title="Upcoming events" subtitle="Experience God's Presence" fullscreen>*/}
+      {/*  <UpcomingEvents events={events} carousel />*/}
+      {/*</PageSection>*/}
 
-      <PageSection className="latest_news" title="Latest News" subtitle="Be part of a community of people experiencing God together." fullscreen>
-        <LatestNews news={news} />
-      </PageSection>
+      {/*<PageSection className="latest_news" title="Latest News" subtitle="Be part of a community of people experiencing God together." fullscreen>*/}
+      {/*  <LatestNews news={news} carousel />*/}
+      {/*</PageSection>*/}
     </div>
   </Layout>
 }
 
 export async function getStaticProps(ctx) {
-  const pages = await client.fetch(`*[_type == 'page' && slug.current == "index"]`)
+  const pages = await client.fetch(`*[_type == 'page' && slug.current == "index"]{${groqLinkProjection}}`)
   const globalProps = await fetchGlobalProps(client)
 
   // const currentPage = ctx.params.currentPage || 0
