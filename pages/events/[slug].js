@@ -7,6 +7,7 @@ import Image from '@/components/sanity/image'
 import {PortableText} from "@portabletext/react";
 import UpcomingEvents from '@/components/upcomingEvents'
 import {groqLinkProjection} from '@/components/sanity/link'
+import {findLinks} from 'helpers'
 
 export default function Event({event, events, ...globalProps}) {
     event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
@@ -84,13 +85,13 @@ export default function Event({event, events, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const events = await client.fetch(`*[_type == 'event' && slug.current == "${slug}"]{${groqLinkProjection}}`)
+    const event = await findLinks((await client.fetch(`*[_type == 'event' && slug.current == "${slug}"]{${groqLinkProjection}}`))[0])
     const globalProps = await fetchGlobalProps(client)
 
 
     return {
         props: {
-            event: events[0],
+            event,
             ...globalProps
         }
     }

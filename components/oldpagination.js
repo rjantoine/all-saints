@@ -292,7 +292,7 @@ export default function Pagination({items, itemsPerPage, itemComponent}) {
                 { page > 0 && <a onClick={(e) => { e.preventDefault(); setPage(Math.max(0, page-1)) }} style={{fontSize: '5em'}}><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="0.48em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 608 1280"><path fill="#b10707" d="M595 288q0 13-10 23L192 704l393 393q10 10 10 23t-10 23l-50 50q-10 10-23 10t-23-10L23 727q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23z"/></svg></a> }
             </div>
             <div className="col col-12 col-md-10">
-                <div class="row justify-content-center">
+                <div className="row justify-content-center">
                     { items.slice(page*itemsPerPage, (page+1)*itemsPerPage).map(item => itemComponent(item)) }
                 </div>
             </div>

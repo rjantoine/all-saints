@@ -29,6 +29,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
         },
         marks: {
             link: sanityLink,
+            center: ({children}) => <div className="text-center">{children}</div>
         }
     }
 

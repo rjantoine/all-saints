@@ -10,6 +10,7 @@
  */
 
 import link from './link'
+import { AiOutlineAlignCenter } from "react-icons/ai";
 
 export default {
   title: 'Block Content',
@@ -39,6 +40,13 @@ export default {
         decorators: [
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
+          {
+            title: 'Center',
+            value: 'center',
+            blockEditor: {
+              icon: AiOutlineAlignCenter
+            },
+          }
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -58,6 +66,11 @@ export default {
           title: 'Description',
           type: 'string',
           description: 'For search engines and the visually impaired'
+        },
+        {
+          name: 'className',
+          title: 'CSS Class Name',
+          type: 'string'
         },
         {
           name: 'width',

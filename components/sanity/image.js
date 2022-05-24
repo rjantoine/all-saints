@@ -9,7 +9,7 @@ export default function Image({width, height, fit, value: image, withLink, ...pr
     if(fit) img = img.fit(fit)
     
     return <>
-        { !withLink && <img className="w-100" src={img.url()} alt="" {...props} /> }
-        { withLink && <Link href={urlFor(image).url()}><a {...withLink}><img src={img.url()} className="w-100" alt={image.alt} {...props} /></a></Link> }
+        { !withLink && <img src={img.url()} className={`w-100 ${image.className}`.trim()} alt={image.alt} {...props} /> }
+        { withLink && <Link href={img.url()}><a {...withLink}><img src={img.url()} className={`w-100 ${image.className}`.trim()} alt={image.alt} {...props} /></a></Link> }
     </>
 }

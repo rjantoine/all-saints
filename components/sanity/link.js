@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import client from 'client'
 
 export default function SanityLink({value:{linkType, blank, href=''}, children}) {
     // select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
@@ -7,24 +8,12 @@ export default function SanityLink({value:{linkType, blank, href=''}, children})
 }
 
 export const groqLinkProjection = `
-    ...,
-    body[]{
-        ...,
-        link{
-            _type == "link" => {
-                ...,
-                "href": select(@.linkType == 'internal' => select(@.internalLink->_type == 'page' => '', select(@.internalLink->_type == 'event' => '/events', select(@.internalLink->_type == 'ministry' => '/ministries', '/'+@.internalLink->_type))) + '/' + select(@.internalLink->slug.current == 'index' => '', @.internalLink->slug.current), @.href)
-            }
-        },
-        markDefs[]{
-            ...,
-            _type == "link" => {
-                ...,
-                "href": select(@.linkType == 'internal' => select(@.internalLink->_type == 'page' => '', select(@.internalLink->_type == 'event' => '/events', select(@.internalLink->_type == 'ministry' => '/ministries', '/'+@.internalLink->_type))) + '/' + select(@.internalLink->slug.current == 'index' => '', @.internalLink->slug.current), @.href)
-            }
-        }
-    }
+    ...
 `
+// The issue is that the internalLink can be rather deep.
+// go through each key
+// if _type = 'link', ...
+// if array, recursive each array
 
 // export default {
 //     name: "link",

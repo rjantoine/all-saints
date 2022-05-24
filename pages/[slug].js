@@ -11,6 +11,7 @@ import mission from '../components/sanity/mission'
 import quote from '../components/sanity/quote'
 import gallery from '../components/sanity/gallery'
 import {groqLinkProjection} from '@/components/sanity/link'
+import {findLinks} from 'helpers'
 
 export default function Pages({page, ...globalProps}) {
     return <Layout title={page.title} {...globalProps}>
@@ -20,12 +21,12 @@ export default function Pages({page, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const pages = await client.fetch(`*[_type == 'page' && slug.current == '${slug}']{${groqLinkProjection}}`)
+    const page = await findLinks((await client.fetch(`*[_type == 'page' && slug.current == '${slug}']{${groqLinkProjection}}`))[0])
     const globalProps = await fetchGlobalProps(client)
 
     return {
         props: {
-            page: pages[0],
+            page,
             ...globalProps
         }
     }

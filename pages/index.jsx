@@ -11,6 +11,7 @@ import PageSection from "../components/pageSection";
 import LatestNews from "../components/latestNews";
 import Gallery from "../components/sanity/gallery"
 import {groqLinkProjection} from '@/components/sanity/link'
+import {findLinks} from 'helpers'
 
 import Carousel from '../components/carousel'
 
@@ -39,7 +40,7 @@ export default function HomePage({page, events, news, ...globalProps}) {
 }
 
 export async function getStaticProps(ctx) {
-  const pages = await client.fetch(`*[_type == 'page' && slug.current == "index"]{${groqLinkProjection}}`)
+  const page = await findLinks((await client.fetch(`*[_type == 'page' && slug.current == "index"]{${groqLinkProjection}}`))[0])
   const globalProps = await fetchGlobalProps(client)
 
   // const currentPage = ctx.params.currentPage || 0
@@ -49,7 +50,7 @@ export async function getStaticProps(ctx) {
 
   return {
     props: {
-      page: pages[0],
+      page,
       ...globalProps
     }
   }

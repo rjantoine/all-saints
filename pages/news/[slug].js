@@ -7,6 +7,7 @@ import Image from '../../components/sanity/image'
 import {PortableText} from "@portabletext/react"
 import LatestNews from "../../components/latestNews"
 import {groqLinkProjection} from '@/components/sanity/link'
+import {findLinks} from 'helpers'
 
 export default function News({post, news, ...globalProps}) {
     post.publishedAt = new Date(post.publishedAt)
@@ -14,7 +15,7 @@ export default function News({post, news, ...globalProps}) {
         post.publishedAt = new Date(post.publishedAt)
     })
 
-    return <Layout title={post.title + ' | News'} {...globalProps}>
+    return <Layout title={post.title + ' | News'} news={news} {...globalProps}>
         <HomeBar title={post.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'News', link: '/news/'}]}/>
         <PageSection title={post.title}>
             <Image value={post.mainImage} width={1170} height={500} style={{width: '100%'}} />
@@ -34,12 +35,12 @@ export default function News({post, news, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const news = await client.fetch(`*[_type == 'news' && slug.current == "${slug}"]{${groqLinkProjection}}`)
+    const news = await findLinks((await client.fetch(`*[_type == 'news' && slug.current == "${slug}"]{${groqLinkProjection}}`))[0])
     const globalProps = await fetchGlobalProps(client)
 
     return {
         props: {
-            post: news[0],
+            post: news,
             ...globalProps
         }
     }

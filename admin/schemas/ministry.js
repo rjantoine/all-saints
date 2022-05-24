@@ -34,7 +34,8 @@ export default {
     {
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'array',
+      of: [{type: 'section'}, {type: 'columnsSection'}, {type: 'hero'}, {type: 'imageTextSection'}, {type: 'mission'}, {type: 'quote'}, {type: 'gallery'}, {type: 'documentsDisplay'}]
     },
   ],
 
