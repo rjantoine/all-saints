@@ -21,7 +21,7 @@ export default function News({post, news, ...globalProps}) {
             <Image value={post.mainImage} width={1170} height={500} style={{width: '100%'}} />
             <p className="w-100 my-4">
                 <i className="fa fa-calendar-o mr-2" aria-hidden="true" style={{color: '#b10707'}}></i>
-                {post.publishedAt.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                {post.publishedAt?.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
             <PortableText
                 value={post.body}
