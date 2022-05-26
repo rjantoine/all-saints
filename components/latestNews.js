@@ -17,7 +17,7 @@ export default function LatestNews({news, carousel}) {
                 </div>
                 <div className="news_post_meta">
                     <ul>
-                        <li><i className="fa fa-calendar-o" aria-hidden="true"></i><span className="ml-2">{post.publishedAt.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></li>
+                        <li><i className="fa fa-calendar-o" aria-hidden="true"></i><span className="ml-2">{post.publishedAt?.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></li>
                     </ul>
                 </div>
                 <div className="news_post_text">
