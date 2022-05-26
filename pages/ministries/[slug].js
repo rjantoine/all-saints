@@ -29,7 +29,10 @@ export default function Ministry({ministry, ministries, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const ministry = await findLinks((await client.fetch(`*[_type == 'ministry' && slug.current == "${slug}"]{${groqLinkProjection}}`))[0])
+    const ministries = await client.fetch(`*[_type == 'ministry' && slug.current == "${slug}"]{${groqLinkProjection}}`)
+    if(ministries.length == 0) return { notFound: true }
+    
+    const ministry = await findLinks(ministries[0])
     const globalProps = await fetchGlobalProps(client)
 
     return {

@@ -40,7 +40,10 @@ export default function HomePage({page, events, news, ...globalProps}) {
 }
 
 export async function getStaticProps(ctx) {
-  const page = await findLinks((await client.fetch(`*[_type == 'page' && slug.current == "index"]{${groqLinkProjection}}`))[0])
+  const pages = await client.fetch(`*[_type == 'page' && slug.current == "index"]{${groqLinkProjection}}`)
+  if(pages.length == 0) return { notFound: true }
+  
+  const page = await findLinks(pages[0])
   const globalProps = await fetchGlobalProps(client)
 
   // const currentPage = ctx.params.currentPage || 0

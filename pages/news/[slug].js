@@ -35,7 +35,10 @@ export default function News({post, news, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const news = await findLinks((await client.fetch(`*[_type == 'news' && slug.current == "${slug}"]{${groqLinkProjection}}`))[0])
+    const results = await client.fetch(`*[_type == 'news' && slug.current == "${slug}"]{${groqLinkProjection}}`)
+    if(results.length == 0) return { notFound: true }
+
+    const news = await findLinks(results[0])
     const globalProps = await fetchGlobalProps(client)
 
     return {

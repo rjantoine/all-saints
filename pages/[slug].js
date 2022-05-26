@@ -21,7 +21,10 @@ export default function Pages({page, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const page = await findLinks((await client.fetch(`*[_type == 'page' && slug.current == '${slug}']{${groqLinkProjection}}`))[0])
+    const pages = await client.fetch(`*[_type == 'page' && slug.current == '${slug}']{${groqLinkProjection}}`)
+    if(pages.length == 0) return { notFound: true }
+    
+    const page = await findLinks(pages[0])
     const globalProps = await fetchGlobalProps(client)
 
     return {

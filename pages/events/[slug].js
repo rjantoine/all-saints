@@ -85,7 +85,10 @@ export default function Event({event, events, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const event = await findLinks((await client.fetch(`*[_type == 'event' && slug.current == "${slug}"]{${groqLinkProjection}}`))[0])
+    const events = await client.fetch(`*[_type == 'event' && slug.current == "${slug}"]{${groqLinkProjection}}`)
+    if(events.length == 0) return { notFound: true }
+
+    const event = await findLinks(events[0])
     const globalProps = await fetchGlobalProps(client)
 
 
