@@ -7,6 +7,11 @@ import Carousel from './carousel'
 import Pagination from './pagination'
 
 export default function UpcomingEvents({events, itemsPerPage=3, carousel, className}) {
+    events.map(event => {
+        event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
+        event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
+    })
+
     const itemComponent = event => {
         const cId = Date.now();
         return <div key={cId+'-'+event._id} data-key={event._id} className="mb-5 pb-5">

@@ -6,6 +6,10 @@ import Carousel from './carousel'
 import Pagination from './pagination'
 
 export default function LatestNews({news, carousel}) {
+    news.map(post => {
+        post.publishedAt = new Date(post.publishedAt)
+    })
+
     const itemComponent = post => <div key={post._id} className="news_post_col">
         <div className="news_post">
             <div className="news_image">
@@ -17,7 +21,7 @@ export default function LatestNews({news, carousel}) {
                 </div>
                 <div className="news_post_meta">
                     <ul>
-                        <li><i className="fa fa-calendar-o" aria-hidden="true"></i><span className="ml-2">{post.publishedAt?.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></li>
+                        <li><i className="fa fa-calendar-o" aria-hidden="true"></i><span className="ml-2">{post.publishedAt.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></li>
                     </ul>
                 </div>
                 <div className="news_post_text">
