@@ -52,7 +52,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                 {/*<script defer src="/js/jquery-3.2.1.min.js"></script>*/}
                 {/*<script defer src="/styles/bootstrap4/popper.js"></script>*/}
                 {/*<script defer src="/styles/bootstrap4/bootstrap.min.js"></script>*/}
-                <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossOrigin="anonymous" />
+                <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossOrigin="anonymous" />
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossOrigin="anonymous" />
                 <script defer src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
                 {/*<script defer src="/plugins/easing/easing.js"></script>*/}

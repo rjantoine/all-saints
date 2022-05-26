@@ -14,10 +14,9 @@ export default function Ministry({ministry, ministries, ...globalProps}) {
         <HomeBar title={ministry.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Ministries', link: '/ministries'}]}/>
         <PageSection title={ministry.title}>
             <Image value={ministry.mainImage} width={1170} height={500} fit="max" style={{width: '100%'}} className="mb-5" />
-            <PortableText
-                value={ministry.body}
-            />
         </PageSection>
+        <PortableText value={ministry.body} />
+        
         <PageSection title="Our Ministries" alt>
             <div className="row">
                 <div className="col-12">
@@ -31,7 +30,7 @@ export default function Ministry({ministry, ministries, ...globalProps}) {
 export async function getStaticProps({params: {slug}}) {
     const ministries = await client.fetch(`*[_type == 'ministry' && slug.current == "${slug}"]{${groqLinkProjection}}`)
     if(ministries.length == 0) return { notFound: true }
-    
+
     const ministry = await findLinks(ministries[0])
     const globalProps = await fetchGlobalProps(client)
 

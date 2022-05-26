@@ -215,11 +215,10 @@ $(document).ready(function()
 
 	function initLightbox()
 	{
-		if($('.gallery_item').length)
+		if($('a.colorbox').length)
 		{
-			$('.colorbox').colorbox(
+			$('a.colorbox').colorbox(
 			{
-				rel:'colorbox',
 				photo: true,
 				maxWidth: '90%',
 				maxHeight: '90%'
