@@ -17,6 +17,12 @@ export const findLinks = async obj => {
                 obj["href"] = urlForLink(obj)
             }
         }
+        if(key == 'link' && obj.link['_type'] == 'link' && obj.link.linkType == 'internal') {
+            if(obj.link.internalLink) {
+                obj.link.internalLink = (await client.fetch(`*[_id == "${obj.link.internalLink._ref}"]`))[0] || null
+                obj.link.href = urlForLink(obj.link)
+            }
+        }
         if(Array.isArray(obj[key])) obj[key].map(o => findLinks(o))
     }
     return obj

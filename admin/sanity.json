@@ -13,7 +13,8 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "order-documents",
-    "asset-source-unsplash"
+    "asset-source-unsplash",
+    "icon-picker"
   ],
   "env": {
     "development": {

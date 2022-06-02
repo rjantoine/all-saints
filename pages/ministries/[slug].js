@@ -12,11 +12,11 @@ import {urlForLink, findLinks} from 'helpers'
 export default function Ministry({ministry, ministries, ...globalProps}) {
     return <Layout title={ministry.title + ' | Ministries'} {...globalProps}>
         <HomeBar title={ministry.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Ministries', link: '/ministries'}]}/>
-        <PageSection title={ministry.title}>
+        <PageSection title={ministry.title} className="pb-5">
             <Image value={ministry.mainImage} width={1170} height={500} fit="max" style={{width: '100%'}} className="mb-5" />
         </PageSection>
         <PortableText value={ministry.body} />
-        
+
         <PageSection title="Our Ministries" alt>
             <div className="row">
                 <div className="col-12">

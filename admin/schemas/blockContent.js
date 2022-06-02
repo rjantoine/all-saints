@@ -11,6 +11,8 @@
 
 import link from './link'
 import { AiOutlineAlignCenter } from "react-icons/ai";
+import React from 'react'
+import preview from "part:sanity-plugin-icon-picker/preview"
 
 export default {
   title: 'Block Content',
@@ -46,11 +48,21 @@ export default {
             blockEditor: {
               icon: AiOutlineAlignCenter
             },
-          }
+          },
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
-            link
+            link,
+          {
+            title: "Icon",
+            name: "icon",
+            type: "iconPicker",
+            options: {
+              providers: ["fa"],
+              outputFormat: 'react',
+            },
+            blockEditor: { render: ({name, provider, children}) => { return <>{preview({name, provider})} {children}</> } }
+          }
         ],
       },
     },

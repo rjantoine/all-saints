@@ -25,10 +25,11 @@
     "prop-types": "^15.7",
     "react": "^17.0",
     "react-dom": "^17.0",
+    "react-icons": "^4.3",
     "sanity-plugin-asset-source-unsplash": "^0.2.1",
+    "sanity-plugin-icon-picker": "^2.0.2",
     "sanity-plugin-order-documents": "^0.0.22",
-    "styled-components": "^5.2.0",
-    "react-icons": "^4.3"
+    "styled-components": "^5.2.0"
   },
   "devDependencies": {}
 }

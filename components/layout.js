@@ -16,6 +16,8 @@ import mission from './sanity/mission'
 import quote from './sanity/quote'
 import sanityLink from './sanity/link'
 import DocumentsDisplay from './sanity/documentsDisplay'
+import * as Fa from "react-icons/fa"
+import { IconContext } from "react-icons";
 
 export default function Layout({ title, description, children, mainMenuItems, footerMenuItems, news, events, ministries}) {
     const email = 'info@allsaintsdaincity.ca'
@@ -29,6 +31,12 @@ export default function Layout({ title, description, children, mainMenuItems, fo
         },
         marks: {
             link: sanityLink,
+            icon: ({value, children}) => {
+                // console.log(Fa)
+                if(!Fa.hasOwnProperty(value.name)) return `Icon ${value.name} not found`
+                const Icon = Fa[value.name];
+                return <><span className="icon"><Icon /></span>{children}</>
+            },
             center: ({children}) => <div className="text-center">{children}</div>
         }
     }
