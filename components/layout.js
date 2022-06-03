@@ -15,6 +15,7 @@ import imageTextSection from './sanity/imageTextSection'
 import mission from './sanity/mission'
 import quote from './sanity/quote'
 import sanityLink from './sanity/link'
+import youtube from './sanity/youtube'
 import DocumentsDisplay from './sanity/documentsDisplay'
 import * as Fa from "react-icons/fa"
 import { IconContext } from "react-icons";
@@ -26,14 +27,14 @@ export default function Layout({ title, description, children, mainMenuItems, fo
 
     const sanityComponents = {
         types:{
-            column, image, button, linkButton, gallery, hero, section, columnsSection, imageTextSection, mission, quote, gallery,
+            column, image, button, linkButton, gallery, hero, section, columnsSection, imageTextSection, mission, quote, gallery, youtube,
             documentsDisplay: ({value}) => <DocumentsDisplay value={value} ministries={ministries} news={news} events={events} />
         },
         marks: {
             link: sanityLink,
             icon: ({value, children}) => {
                 // console.log(Fa)
-                if(!Fa.hasOwnProperty(value.name)) return `Icon ${value.name} not found`
+                // if(!Fa.hasOwnProperty(value.name)) return `Icon ${value.name} not found`
                 const Icon = Fa[value.name];
                 return <><span className="icon"><Icon /></span>{children}</>
             },

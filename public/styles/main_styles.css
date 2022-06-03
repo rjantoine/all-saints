@@ -1962,3 +1962,10 @@ section
 	width: 100%;
 	height: calc(100% + 30px);
 }
+
+.embedded-video-16-9 {
+	width:  100vw;
+	max-width: 100%;
+	height: 100vh; /* 90*9/16 */
+	max-height: 56.25vw;
+}

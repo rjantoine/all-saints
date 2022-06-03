@@ -102,6 +102,7 @@ export default {
     { type: 'button' },
     { type: 'linkButton' },
     {type: 'gallery'},
-    {type: 'documentsDisplay'}
+    {type: 'documentsDisplay'},
+    { type: 'youtube' }
   ],
 }

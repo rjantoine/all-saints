@@ -26,6 +26,7 @@ import ministry from './ministry'
 import documentsDisplay from './documentsDisplay'
 import gallery from './gallery'
 import link from './link'
+import youtube from './youtube'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -56,6 +57,7 @@ export default createSchema({
     quote,
     documentsDisplay,
     gallery,
-    link
+    link,
+    youtube
   ]),
 })
