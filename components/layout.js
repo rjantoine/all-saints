@@ -16,6 +16,7 @@ import mission from './sanity/mission'
 import quote from './sanity/quote'
 import sanityLink from './sanity/link'
 import youtube from './sanity/youtube'
+import contactForm from './sanity/contactForm'
 import DocumentsDisplay from './sanity/documentsDisplay'
 import * as Fa from "react-icons/fa"
 import { IconContext } from "react-icons";
@@ -27,7 +28,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
 
     const sanityComponents = {
         types:{
-            column, image, button, linkButton, gallery, hero, section, columnsSection, imageTextSection, mission, quote, gallery, youtube,
+            column, image, button, linkButton, gallery, hero, section, columnsSection, imageTextSection, mission, quote, gallery, youtube, contactForm,
             documentsDisplay: ({value}) => <DocumentsDisplay value={value} ministries={ministries} news={news} events={events} />
         },
         marks: {

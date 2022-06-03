@@ -103,6 +103,7 @@ export default {
     { type: 'linkButton' },
     {type: 'gallery'},
     {type: 'documentsDisplay'},
-    { type: 'youtube' }
+    { type: 'youtube' },
+    { type: 'contactForm' }
   ],
 }

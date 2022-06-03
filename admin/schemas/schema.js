@@ -27,6 +27,7 @@ import documentsDisplay from './documentsDisplay'
 import gallery from './gallery'
 import link from './link'
 import youtube from './youtube'
+import contactForm from './contactForm'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -58,6 +59,7 @@ export default createSchema({
     documentsDisplay,
     gallery,
     link,
-    youtube
+    youtube,
+    contactForm
   ]),
 })
