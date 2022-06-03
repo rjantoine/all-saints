@@ -18,7 +18,8 @@ export default {
                 list: [
                     {title: "News", value: "news"},
                     {title: "Events", value: "events"},
-                    {title: "Ministries", value: "ministries"}
+                    {title: "Ministries", value: "ministries"},
+                    {title: "Map", value: 'map'}
                 ],
             }
         },
@@ -26,6 +27,7 @@ export default {
             name: 'displayStyle',
             title: 'Display Style',
             type: 'string',
+            hidden: ({ parent }) => !['news', 'events', 'ministries'].includes(parent?.documentsType),
             options: {
                 list: [
                     {title: "Pagination", value: "pagination"},
