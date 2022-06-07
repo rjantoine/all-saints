@@ -118,7 +118,9 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                                                     <li key={`menuItem${i}`} className={menuTitle == title ? 'active' : ''}><a href={link}>{menuTitle}</a></li>
                                                 )}
                                             </ul>
+                                            {/*
                                             <div className="search_button"><i className="fa fa-search" aria-hidden="true"></i></div>
+                                            */}
                                         </nav>
 
                                         <div className="hamburger ml-auto">
