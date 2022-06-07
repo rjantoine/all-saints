@@ -639,7 +639,8 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.menu_nav ul li a:hover
+.menu_nav ul li a:hover,
+.menu_nav li.active a
 {
 	color: #eb4141;
 }

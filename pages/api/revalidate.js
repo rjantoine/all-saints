@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         }
     }
 
-    console.log("[Next.js] Revalidating...")
+    console.log("[Next.js] Revalidating... "+JSON.stringify(req))
     let revalidate = false
     try {
         await Promise.all(
@@ -29,6 +29,6 @@ export default async function handler(req, res) {
         const updatedRoutes = `Updated routes: ${staleRoutes.join(', ')}`
         return res.status(200).json({ success: true, message: updatedRoutes, })
     } catch (err) {
-        return res.status(501).json({ error: JSON.stringify(err), message: err.message }).body(JSON.stringify(err))
+        return res.status(501).json({ error: JSON.stringify(err), message: err.message }).body(JSON.stringify(req)+' '+JSON.stringify(err))
     }
 }

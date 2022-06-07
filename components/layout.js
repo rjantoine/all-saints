@@ -114,8 +114,8 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                                         </div>
                                         <nav className="main_nav_contaner mx-auto text-center">
                                             <ul className="main_nav">
-                                                { mainMenuItems.map(({title, link}, i) =>
-                                                    <li key={`menuItem${i}`}><a href={link}>{title}</a></li>
+                                                { mainMenuItems.map(({menuTitle, link}, i) =>
+                                                    <li key={`menuItem${i}`} className={menuTitle == title ? 'active' : ''}><a href={link}>{menuTitle}</a></li>
                                                 )}
                                             </ul>
                                             <div className="search_button"><i className="fa fa-search" aria-hidden="true"></i></div>
@@ -150,6 +150,33 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                         </div>
                     </div>
                 </header>
+                {/* Mobile menu */}
+                <div className="menu d-flex flex-column align-items-center justify-content-center">
+                    <div className="menu_content">
+                        <div className="my-3 mx-auto" style={{width: 150}}><a href="/"><FontAwesomeIcon icon={faChurch} style={{height: 120}} color="#b10707" /></a></div>
+                        <div className="logo_text w-100 text-center"><a href="/" style={{color: 'inherit'}}>All&nbsp;Saint Anglican&nbsp;Church</a></div>
+                        <div className="cross_1 d-flex flex-column align-items-center justify-content-center">
+
+                        </div>
+                        {/*
+                        <form action="#" className="menu_search_form">
+                            <input type="search" className="menu_search_input" placeholder="Search" required="required" />
+                                <button
+                                    className="menu_search_button d-flex flex-column align-items-center justify-content-center">
+                                    <i className="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                        </form>
+                        */}
+                        <nav className="menu_nav">
+                            <ul>
+                                { mainMenuItems.map(({menuTitle, link}, i) =>
+                                    <li key={`mobileMenuItem${i}`} className={menuTitle == title ? 'active' : ''}><a href={link}>{menuTitle}</a></li>
+                                )}
+                            </ul>
+                        </nav>
+                    </div>
+                    <div className="menu_close"><i className="fa fa-times" aria-hidden="true"></i></div>
+                </div>
             </div>
             <main><PortableTextComponentsProvider components={sanityComponents}>{children}</PortableTextComponentsProvider></main>
             <footer className="footer" style={{backgroundImage: 'url(/images/footer.jpg)'}}>
@@ -214,7 +241,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
 }
 
 export async function fetchGlobalProps(client) {
-    const mainMenuItems = await client.fetch(`*[_type == 'mainMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
+    const mainMenuItems = await client.fetch(`*[_type == 'mainMenuItems']| order(order asc) {'menuTitle':title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
     const footerMenuItems = await client.fetch(`*[_type == 'footerMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
     const events = await client.fetch(`*[_type == "event" && (startTime > now() || endTime > now())] | order(startTime)`)
     const news = await client.fetch(`*[_type == "news"] | order(publishedAt desc)`)
