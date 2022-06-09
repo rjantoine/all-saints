@@ -8,8 +8,11 @@ import {PortableText} from "@portabletext/react"
 import LatestNews from "../../components/latestNews"
 import {groqLinkProjection} from '@/components/sanity/link'
 import {findLinks} from 'helpers'
+import Error from './404'
 
 export default function News({post, news, ...globalProps}) {
+    if(!post) return <Error />
+    
     post.publishedAt = new Date(post.publishedAt)
     news.map(post => {
         post.publishedAt = new Date(post.publishedAt)
@@ -53,6 +56,6 @@ export async function getStaticPaths() {
     const news = await client.fetch(`*[_type == "news"]{slug}`)
     return {
         paths: news.map(post => ({params: {slug: post.slug.current}})),
-        fallback: true
+        fallback: 'blocking'
     }
 }

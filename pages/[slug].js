@@ -12,8 +12,11 @@ import quote from '../components/sanity/quote'
 import gallery from '../components/sanity/gallery'
 import {groqLinkProjection} from '@/components/sanity/link'
 import {findLinks} from 'helpers'
+import Error from './404'
 
 export default function Pages({page, ...globalProps}) {
+    if(!page) return <Error />
+
     return <Layout title={page.title} {...globalProps}>
         <HomeBar title={page.title} breadcrumbs={[{title:'Home', link:'/'}]}/>
         <PortableText value={page.body} />
@@ -23,7 +26,7 @@ export default function Pages({page, ...globalProps}) {
 export async function getStaticProps({params: {slug}}) {
     const pages = await client.fetch(`*[_type == 'page' && slug.current == '${slug}']{${groqLinkProjection}}`)
     if(pages.length == 0) return { notFound: true }
-    
+
     const page = await findLinks(pages[0])
     const globalProps = await fetchGlobalProps(client)
 
@@ -39,6 +42,6 @@ export async function getStaticPaths() {
     const pages = await client.fetch(`*[_type == "page"]{slug}`)
     return {
         paths: pages.map(page => ({params: {slug: page.slug.current}})),
-        fallback: true
+        fallback: 'blocking'
     }
 }

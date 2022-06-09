@@ -8,8 +8,11 @@ import {PortableText} from "@portabletext/react";
 import MinistriesSection from '@/components/sanity/ministriesSection'
 import {groqLinkProjection} from '@/components/sanity/link'
 import {urlForLink, findLinks} from 'helpers'
+import Error from './404'
 
 export default function Ministry({ministry, ministries, ...globalProps}) {
+    if(!ministry) return <Error />
+    
     return <Layout title={ministry.title + ' | Ministries'} {...globalProps}>
         <HomeBar title={ministry.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Ministries', link: '/ministries'}]}/>
         <PageSection title={ministry.title} className="pb-5">
@@ -46,6 +49,6 @@ export async function getStaticPaths() {
     const ministries = await client.fetch(`*[_type == "ministry"]{slug}`)
     return {
         paths: ministries.map(ministry => ({params: {slug: ministry.slug.current}})),
-        fallback: true
+        fallback: 'blocking'
     }
 }

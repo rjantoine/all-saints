@@ -8,8 +8,10 @@ import {PortableText} from "@portabletext/react";
 import UpcomingEvents from '@/components/upcomingEvents'
 import {groqLinkProjection} from '@/components/sanity/link'
 import {findLinks} from 'helpers'
+import Error from './404'
 
 export default function Event({event, events, ...globalProps}) {
+    if(!event) return <Error />
     event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
     event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
     events.map(event => {
@@ -104,6 +106,6 @@ export async function getStaticPaths() {
     const events = await client.fetch(`*[_type == "event"]{slug}`)
     return {
         paths: events.map(event => ({params: {slug: event.slug.current}})),
-        fallback: true
+        fallback: 'blocking'
     }
 }
