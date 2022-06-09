@@ -14,8 +14,10 @@ export default function Image({width, height, fit, value: image, withLink, ...pr
 
     if(fit) img = img.fit(fit)
 
+    const classWidth = (image.className && (image.className.includes('w-75') || image.className.includes('w-50') || image.className.includes('w-25'))) ? '' : 'w-100'
+
     return <>
-        { !withLink && <img src={img.url()} className={`w-100 ${image.className || ''}`.trim()} alt={image.alt} /> }
-        { withLink && <Link href={img.url()}><a {...withLink}><img src={img.url()} className={`w-100 ${image.className || ''}`.trim()} alt={image.alt} /></a></Link> }
+        { !withLink && <img src={img.url()} className={`${classWidth}${image.className || ''}`.trim()} alt={image.alt} /> }
+        { withLink && <Link href={img.url()}><a {...withLink}><img src={img.url()} className={`${classWidth}${image.className || ''}`.trim()} alt={image.alt} /></a></Link> }
     </>
 }

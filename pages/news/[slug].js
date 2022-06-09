@@ -53,6 +53,6 @@ export async function getStaticPaths() {
     const news = await client.fetch(`*[_type == "news"]{slug}`)
     return {
         paths: news.map(post => ({params: {slug: post.slug.current}})),
-        fallback: false
+        fallback: true
     }
 }

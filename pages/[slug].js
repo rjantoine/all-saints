@@ -39,6 +39,6 @@ export async function getStaticPaths() {
     const pages = await client.fetch(`*[_type == "page"]{slug}`)
     return {
         paths: pages.map(page => ({params: {slug: page.slug.current}})),
-        fallback: false
+        fallback: true
     }
 }

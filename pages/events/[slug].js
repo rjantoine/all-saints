@@ -104,6 +104,6 @@ export async function getStaticPaths() {
     const events = await client.fetch(`*[_type == "event"]{slug}`)
     return {
         paths: events.map(event => ({params: {slug: event.slug.current}})),
-        fallback: false
+        fallback: true
     }
 }

@@ -46,6 +46,6 @@ export async function getStaticPaths() {
     const ministries = await client.fetch(`*[_type == "ministry"]{slug}`)
     return {
         paths: ministries.map(ministry => ({params: {slug: ministry.slug.current}})),
-        fallback: false
+        fallback: true
     }
 }
