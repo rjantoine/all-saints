@@ -20,7 +20,7 @@ export default function Ministry({ministry, ministries, ...globalProps}) {
         </PageSection>
         <PortableText value={ministry.body} />
 
-        <PageSection title="Our Ministries" alt>
+        <PageSection title="Serving our community" alt>
             <div className="row">
                 <div className="col-12">
                     <MinistriesSection ministries={ministries} />
