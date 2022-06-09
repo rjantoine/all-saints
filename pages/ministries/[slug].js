@@ -8,7 +8,7 @@ import {PortableText} from "@portabletext/react";
 import MinistriesSection from '@/components/sanity/ministriesSection'
 import {groqLinkProjection} from '@/components/sanity/link'
 import {urlForLink, findLinks} from 'helpers'
-import Error from './404'
+import Error from '../404'
 
 export default function Ministry({ministry, ministries, ...globalProps}) {
     if(!ministry) return <Error />

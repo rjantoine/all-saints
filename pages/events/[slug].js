@@ -8,7 +8,7 @@ import {PortableText} from "@portabletext/react";
 import UpcomingEvents from '@/components/upcomingEvents'
 import {groqLinkProjection} from '@/components/sanity/link'
 import {findLinks} from 'helpers'
-import Error from './404'
+import Error from '../404'
 
 export default function Event({event, events, ...globalProps}) {
     if(!event) return <Error />

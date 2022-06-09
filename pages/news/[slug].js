@@ -8,11 +8,11 @@ import {PortableText} from "@portabletext/react"
 import LatestNews from "../../components/latestNews"
 import {groqLinkProjection} from '@/components/sanity/link'
 import {findLinks} from 'helpers'
-import Error from './404'
+import Error from '../404'
 
 export default function News({post, news, ...globalProps}) {
     if(!post) return <Error />
-    
+
     post.publishedAt = new Date(post.publishedAt)
     news.map(post => {
         post.publishedAt = new Date(post.publishedAt)
