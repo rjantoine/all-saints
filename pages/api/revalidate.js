@@ -1,4 +1,6 @@
 import { isValidRequest } from '@sanity/webhook'
+import client from "client"
+import { urlForLink } from "helpers"
 
 export default async function handler(req, res) {
     // if (!isValidRequest(req, 'ABC')) {
@@ -9,16 +11,25 @@ export default async function handler(req, res) {
     const staleRoutes = ['/']
     const { slug, _type } = req?.body
     console.log('Request body: '+JSON.stringify(req?.body))
-    if(slug?.current !== 'index') {
-        if(_type == 'page') staleRoutes.push('/'+slug?.current)
-        if(_type == 'news') {
-            staleRoutes.push('/news/'+slug?.current)
-            staleRoutes.push('/news')
-        }
-        if(_type == 'event') {
-            staleRoutes.push('/events/'+slug?.current)
-            staleRoutes.push('/events')
-        }
+    if(_type == 'page' && slug !== 'index') staleRoutes.push('/'+slug)
+    if(_type == 'news') {
+        const news = await client.fetch(`*[_type == "news"]{'slug':slug.current}`)
+        news.forEach(post => staleRoutes.push('/news/'+post.slug))
+        staleRoutes.push('/news')
+    }
+    if(_type == 'event') {
+        const events = await client.fetch(`*[_type == "event"]{'slug':slug.current}`)
+        events.forEach(post => staleRoutes.push('/events/'+post.slug))
+        staleRoutes.push('/events')
+    }
+    if(_type == 'ministry') {
+        const ministries = await client.fetch(`*[_type == "ministry"]{'slug':slug.current}`)
+        news.forEach(post => staleRoutes.push('/ministries/'+post.slug))
+        staleRoutes.push('/ministries')
+    }
+    if(_type == 'mainMenuItems' || _type == 'footerMenuItems') {
+        const allRoutes = await client.fetch(`*[slug != null]{slug, _type}`)
+        allRoutes.forEach(route => if(_type == 'page' && slug !== 'index') staleRoutes.push(urlForLink({linkType: 'internal', internalLink: route})))
     }
 
     console.log(`[Next.js] Revalidating: ${staleRoutes.join(', ')}`)
