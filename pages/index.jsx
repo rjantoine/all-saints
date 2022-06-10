@@ -40,7 +40,7 @@ export default function HomePage({page, events, news, ...globalProps}) {
 }
 
 export async function getStaticProps(ctx) {
-  const pages = await client.fetch(`*[_type == 'page' && slug.current == "index"]{${groqLinkProjection}}`)
+  const pages = await client.fetch(`*[_type == 'page' && slug.current == "index" && !(_id in path("drafts.**"))]{${groqLinkProjection}}`)
   if(pages.length == 0) return { notFound: true }
   
   const page = await findLinks(pages[0])

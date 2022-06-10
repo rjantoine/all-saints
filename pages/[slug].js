@@ -24,7 +24,7 @@ export default function Pages({page, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const pages = await client.fetch(`*[_type == 'page' && slug.current == '${slug}']{${groqLinkProjection}}`)
+    const pages = await client.fetch(`*[_type == 'page' && slug.current == '${slug}' && !(_id in path("drafts.**"))]{${groqLinkProjection}}`)
     if(pages.length == 0) return { notFound: true }
 
     const page = await findLinks(pages[0])
@@ -39,7 +39,7 @@ export async function getStaticProps({params: {slug}}) {
 }
 
 export async function getStaticPaths() {
-    const pages = await client.fetch(`*[_type == "page"]{slug}`)
+    const pages = await client.fetch(`*[_type == "page" && !(_id in path("drafts.**"))]{slug}`)
     return {
         paths: pages.map(page => ({params: {slug: page.slug.current}})),
         fallback: 'blocking'

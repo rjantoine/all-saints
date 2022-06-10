@@ -31,7 +31,7 @@ export default function Ministry({ministry, ministries, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const ministries = await client.fetch(`*[_type == 'ministry' && slug.current == "${slug}"]{${groqLinkProjection}}`)
+    const ministries = await client.fetch(`*[_type == 'ministry' && slug.current == "${slug}" && !(_id in path("drafts.**"))]{${groqLinkProjection}}`)
     if(ministries.length == 0) return { notFound: true }
 
     const ministry = await findLinks(ministries[0])
@@ -46,7 +46,7 @@ export async function getStaticProps({params: {slug}}) {
 }
 
 export async function getStaticPaths() {
-    const ministries = await client.fetch(`*[_type == "ministry"]{slug}`)
+    const ministries = await client.fetch(`*[_type == "ministry" && !(_id in path("drafts.**"))]{slug}`)
     return {
         paths: ministries.map(ministry => ({params: {slug: ministry.slug.current}})),
         fallback: 'blocking'

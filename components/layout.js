@@ -243,11 +243,11 @@ export default function Layout({ title, description, children, mainMenuItems, fo
 }
 
 export async function fetchGlobalProps(client) {
-    const mainMenuItems = await client.fetch(`*[_type == 'mainMenuItems']| order(order asc) {'menuTitle':title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
-    const footerMenuItems = await client.fetch(`*[_type == 'footerMenuItems']| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
-    const events = await client.fetch(`*[_type == "event" && (startTime > now() || endTime > now())] | order(startTime)`)
-    const news = await client.fetch(`*[_type == "news"] | order(publishedAt desc)`)
-    const ministries = await client.fetch(`*[_type == "ministry"]| order(order asc)`)
+    const mainMenuItems = await client.fetch(`*[_type == 'mainMenuItems' && !(_id in path("drafts.**"))]| order(order asc) {'menuTitle':title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
+    const footerMenuItems = await client.fetch(`*[_type == 'footerMenuItems' && !(_id in path("drafts.**"))]| order(order asc) {title, 'link':select(link.linkType == 'internal' => select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
+    const events = await client.fetch(`*[_type == "event" && (startTime > now() || endTime > now()) && !(_id in path("drafts.**"))] | order(startTime)`)
+    const news = await client.fetch(`*[_type == "news" && !(_id in path("drafts.**"))] | order(publishedAt desc)`)
+    const ministries = await client.fetch(`*[_type == "ministry" && !(_id in path("drafts.**"))]| order(order asc)`)
 
     return {mainMenuItems, footerMenuItems, events, news, ministries}
 }

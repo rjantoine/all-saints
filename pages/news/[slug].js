@@ -38,7 +38,7 @@ export default function News({post, news, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const results = await client.fetch(`*[_type == 'news' && slug.current == "${slug}"]{${groqLinkProjection}}`)
+    const results = await client.fetch(`*[_type == 'news' && slug.current == "${slug}" && !(_id in path("drafts.**"))]{${groqLinkProjection}}`)
     if(results.length == 0) return { notFound: true }
 
     const news = await findLinks(results[0])
@@ -53,7 +53,7 @@ export async function getStaticProps({params: {slug}}) {
 }
 
 export async function getStaticPaths() {
-    const news = await client.fetch(`*[_type == "news"]{slug}`)
+    const news = await client.fetch(`*[_type == "news" && !(_id in path("drafts.**"))]{slug}`)
     return {
         paths: news.map(post => ({params: {slug: post.slug.current}})),
         fallback: 'blocking'

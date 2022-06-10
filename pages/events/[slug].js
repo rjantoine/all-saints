@@ -87,7 +87,7 @@ export default function Event({event, events, ...globalProps}) {
 }
 
 export async function getStaticProps({params: {slug}}) {
-    const events = await client.fetch(`*[_type == 'event' && slug.current == "${slug}"]{${groqLinkProjection}}`)
+    const events = await client.fetch(`*[_type == 'event' && slug.current == "${slug}" && !(_id in path("drafts.**"))]{${groqLinkProjection}}`)
     if(events.length == 0) return { notFound: true }
 
     const event = await findLinks(events[0])
@@ -103,7 +103,7 @@ export async function getStaticProps({params: {slug}}) {
 }
 
 export async function getStaticPaths() {
-    const events = await client.fetch(`*[_type == "event"]{slug}`)
+    const events = await client.fetch(`*[_type == "event" && !(_id in path("drafts.**"))]{slug}`)
     return {
         paths: events.map(event => ({params: {slug: event.slug.current}})),
         fallback: 'blocking'
