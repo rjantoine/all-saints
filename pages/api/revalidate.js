@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     if(_type == 'mainMenuItems' || _type == 'footerMenuItems') {
         const allRoutes = await client.fetch(`*[slug != null]{slug, _type}`)
         allRoutes.forEach(route => {
-            if(route._type == 'page' && route.slug.current !== 'index') staleRoutes.push(urlForLink({linkType: 'internal', internalLink: route}))
+            if(route._type !== 'page' || route.slug.current !== 'index') staleRoutes.push(urlForLink({linkType: 'internal', internalLink: route}))
         })
     }
 
