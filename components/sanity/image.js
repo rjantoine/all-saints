@@ -18,6 +18,6 @@ export default function Image({width, height, fit, value: image, withLink, ...pr
 
     return <>
         { !withLink && <img src={img.url()} className={`${classWidth}${image.className || ''}`.trim()} alt={image.alt} /> }
-        { withLink && <Link href={img.url()}><a {...withLink}><img src={img.url()} className={`${classWidth}${image.className || ''}`.trim()} alt={image.alt} /></a></Link> }
+        { withLink && <Link href={urlFor(image).url()}><a {...withLink}><img src={img.url()} className={`${classWidth}${image.className || ''}`.trim()} alt={image.alt} /></a></Link> }
     </>
 }
