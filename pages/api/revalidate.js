@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     }
     if(_type == 'ministry') {
         const ministries = await client.fetch(`*[_type == "ministry"]{'slug':slug.current}`)
-        news.forEach(post => staleRoutes.push('/ministries/'+post.slug))
+        ministries.forEach(post => staleRoutes.push('/ministries/'+post.slug))
         staleRoutes.push('/ministries')
     }
     if(_type == 'mainMenuItems' || _type == 'footerMenuItems') {
