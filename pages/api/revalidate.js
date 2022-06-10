@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
     const staleRoutes = ['/']
     const { slug, _type } = req?.body
-    if(slug.current !== 'index') {
+    if(slug?.current !== 'index') {
         if(_type == 'page') staleRoutes.push('/'+slug?.current)
         if(_type == 'news') {
             staleRoutes.push('/news/'+slug?.current)

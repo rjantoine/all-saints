@@ -1490,6 +1490,12 @@ section
 {
 	margin-top: 9px;
 }
+
+.portable_text .news_post_meta ul, .news_post_meta ul
+{
+	margin-left: 0;
+}
+
 .news_post_meta ul li
 {
 	display: inline-block;
