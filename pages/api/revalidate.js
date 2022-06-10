@@ -29,7 +29,9 @@ export default async function handler(req, res) {
     }
     if(_type == 'mainMenuItems' || _type == 'footerMenuItems') {
         const allRoutes = await client.fetch(`*[slug != null]{slug, _type}`)
-        allRoutes.forEach(route => if(_type == 'page' && slug !== 'index') staleRoutes.push(urlForLink({linkType: 'internal', internalLink: route})))
+        allRoutes.forEach(route => {
+            if(_type == 'page' && slug !== 'index') staleRoutes.push(urlForLink({linkType: 'internal', internalLink: route}))
+        })
     }
 
     console.log(`[Next.js] Revalidating: ${staleRoutes.join(', ')}`)
