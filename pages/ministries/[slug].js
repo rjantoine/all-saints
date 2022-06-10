@@ -14,7 +14,7 @@ export default function Ministry({ministry, ministries, ...globalProps}) {
     if(!ministry) return <Error />
     
     return <Layout title={ministry.title + ' | Ministries'} {...globalProps}>
-        <HomeBar title={ministry.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Ministries', link: '/ministries'}]}/>
+        <HomeBar title={ministry.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Ministries', link: '/serving-the-community'}]}/>
         <PageSection title={ministry.title} className="pb-5">
             <Image value={ministry.mainImage} width={1170} height={500} fit="max" style={{width: '100%'}} className="mb-5" />
         </PageSection>
