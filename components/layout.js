@@ -108,7 +108,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                             <div className="row justify-content-center">
                                 <div className="col col-10">
                                     <div className="header_content d-flex flex-row align-items-center justify-content-start">
-                                        <div className="logo_container">
+                                        <div className="logo_container text-nowrap">
                                             <div className="logo mx-2" style={{width: 75}}><a href="/"><FontAwesomeIcon icon={faChurch} style={{height: 60}} color="#b10707" /></a></div>
                                             <div className="logo_text mx-2" style={{verticalAlign: 'center'}}><a href="/" style={{color: 'inherit'}}>All Saint<br />Anglican Church</a></div>
                                         </div>
