@@ -15,6 +15,10 @@ export default function ContactForm({value:{formType}}) {
         prayer: 'template_rgoa4u9',
         contact: 'template_sy45g73'
     }
+    const textareaPlaceholder = {
+        prayer: 'Your Request',
+        contact: 'Your Message'
+    }
     const onSubmit = (e) => {
         e.preventDefault();
         document.getElementById('form-submit').disabled = true;
@@ -61,7 +65,7 @@ export default function ContactForm({value:{formType}}) {
                                    required="required" />
                         </div>
                         <div className="col-12">
-                            <textarea className="form_text" placeholder="Your Message" required="required" name="message"></textarea>
+                            <textarea className="form_text" placeholder={textareaPlaceholder[formType]} required="required" name="message"></textarea>
                             <button type="submit" id="form-submit" className="form_submit_button">{buttonText[formType]}</button>
                         </div>
                     </div>
