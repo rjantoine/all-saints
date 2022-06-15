@@ -7,6 +7,7 @@ export default {
             name: 'vid',
             title: 'Youtube Video ID',
             type: 'string',
+            validation: Rule => Rule.required()
         },
     ],
     preview: {

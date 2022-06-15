@@ -17,6 +17,7 @@ export default {
         source: 'title',
         maxLength: 96,
       },
+      validation: Rule => Rule.required()
     },
     {
       name: 'mainImage',
@@ -32,7 +33,8 @@ export default {
           type: 'string',
           description: 'For the visually impaired'
         }
-      ]
+      ],
+      validation: Rule => Rule.required()
     },
     {
       name: 'publishedAt',
