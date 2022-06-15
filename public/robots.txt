@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://allsaintsdaincity.ca
+
+# Sitemaps
+Sitemap: https://allsaintsdaincity.ca/sitemap.xml
