@@ -72,6 +72,7 @@ export default {
     {
       type: 'image',
       options: {hotspot: true},
+      validation: Rule => [Rule.required().error("Image field is blank. Please add an image file or remove it.")],
       fields: [
         {
           name: 'alt',
