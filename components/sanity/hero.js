@@ -1,5 +1,6 @@
 import {urlFor} from '../../helpers'
-import {PortableText} from "@portabletext/react";
+import {PortableText} from "@portabletext/react"
+import Link from 'next/link'
 
 export default function Hero({value: {title, description, backgroundImage, buttonLink, buttonTitle}}) {
     return <div className="hero">
@@ -13,7 +14,7 @@ export default function Hero({value: {title, description, backgroundImage, butto
                     <div className="col mx-2">
                         <div className="hero_title">{title}</div>
                         <div className="hero_text"><PortableText value={description} /></div>
-                        <div className="button hero_link"><a href={buttonLink}>{buttonTitle}</a></div>
+                        <div className="button hero_link"><Link href={buttonLink}><a>{buttonTitle}</a></Link></div>
                     </div>
                 </div>
             </div>

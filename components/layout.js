@@ -109,13 +109,13 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                                 <div className="col col-10">
                                     <div className="header_content d-flex flex-row align-items-center justify-content-start">
                                         <div className="logo_container text-nowrap">
-                                            <div className="logo mx-2" style={{width: 75}}><a href="/"><FontAwesomeIcon icon={faChurch} style={{height: 60}} color="#b10707" /></a></div>
-                                            <div className="logo_text mx-2" style={{verticalAlign: 'center'}}><a href="/" style={{color: 'inherit'}}>All Saint<br />Anglican Church</a></div>
+                                            <div className="logo mx-2" style={{width: 75}}><Link href="/"><a><FontAwesomeIcon icon={faChurch} style={{height: 60}} color="#b10707" /></a></Link></div>
+                                            <div className="logo_text mx-2" style={{verticalAlign: 'center'}}><Link href="/"><a style={{color: 'inherit'}}>All Saint<br />Anglican Church</a></Link></div>
                                         </div>
                                         <nav className="main_nav_contaner mx-auto text-center">
                                             <ul className="main_nav">
                                                 { mainMenuItems.map(({menuTitle, link}, i) =>
-                                                    <li key={`menuItem${i}`} className={menuTitle == title ? 'active' : ''}><a href={link}>{menuTitle}</a></li>
+                                                    <li key={`menuItem${i}`} className={menuTitle == title ? 'active' : ''}><Link href={link}><a>{menuTitle}</a></Link></li>
                                                 )}
                                             </ul>
                                             {/*
@@ -155,8 +155,8 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                 {/* Mobile menu */}
                 <div className="menu d-flex flex-column align-items-center justify-content-center">
                     <div className="menu_content">
-                        <div className="my-3 mx-auto" style={{width: 150}}><a href="/"><FontAwesomeIcon icon={faChurch} style={{height: 120}} color="#b10707" /></a></div>
-                        <div className="logo_text w-100 text-center"><a href="/" style={{color: 'inherit'}}>All&nbsp;Saint Anglican&nbsp;Church</a></div>
+                        <div className="my-3 mx-auto" style={{width: 150}}><Link href="/"><a><FontAwesomeIcon icon={faChurch} style={{height: 120}} color="#b10707" /></a></Link></div>
+                        <div className="logo_text w-100 text-center"><Link href="/"><a style={{color: 'inherit'}}>All&nbsp;Saint Anglican&nbsp;Church</a></Link></div>
                         <div className="cross_1 d-flex flex-column align-items-center justify-content-center">
 
                         </div>
@@ -172,7 +172,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                         <nav className="menu_nav">
                             <ul>
                                 { mainMenuItems.map(({menuTitle, link}, i) =>
-                                    <li key={`mobileMenuItem${i}`} className={menuTitle == title ? 'active' : ''}><a href={link}>{menuTitle}</a></li>
+                                    <li key={`mobileMenuItem${i}`} className={menuTitle == title ? 'active' : ''}><Link href={link}><a>{menuTitle}</a></Link></li>
                                 )}
                             </ul>
                         </nav>
@@ -187,9 +187,9 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                         <div className="col-lg-4 footer_col">
                             <div className="footer_column footer_contact_column">
                                 <div className="footer_logo_container">
-                                    <a href="/">
+                                    <Link href="/"><a>
                                         <div className="footer_logo_text" style={{lineHeight: 1}}>All Saints<br />Anglican Church</div>
-                                    </a>
+                                    </a></Link>
                                 </div>
                                 <div className="footer_contact">
                                     <ul>
@@ -212,7 +212,7 @@ export default function Layout({ title, description, children, mainMenuItems, fo
                                 <div className="footer_title">useful links</div>
                                 <ul className="footer_links_list">
                                     { footerMenuItems.map(({title, link}, i) => <li key={`footerItem${i}`}>
-                                        <a href={link}><i className="fa fa-angle-double-right" aria-hidden="true"></i> {title}</a>
+                                        <Link href={link}><a><i className="fa fa-angle-double-right" aria-hidden="true"></i> {title}</a></Link>
                                     </li>)}
                                 </ul>
                             </div>

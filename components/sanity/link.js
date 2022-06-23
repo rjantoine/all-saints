@@ -4,7 +4,7 @@ import client from 'client'
 export default function SanityLink({value:{linkType, blank, href=''}, children}) {
     // select(link.internalLink->_type == 'page' => '', link.internalLink->_type) + '/' + select(link.internalLink->slug.current == 'index' => '', link.internalLink->slug.current), link.href)}`)
     // if(linkType == 'internal') href = `${internalLink?._type == 'page' ? '' : internalLink?._type}/${internalLink?.slug?.current == 'index' ? '' : internalLink?.slug?.current}`
-    return <a href={href} target={blank ? '_blank' : '_self'}>{children}</a>
+    return <Link href={href}><a target={blank ? '_blank' : '_self'}>{children}</a></Link>
 }
 
 export const groqLinkProjection = `

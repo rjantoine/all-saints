@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Layout from 'components/layout'
 import {fetchGlobalProps} from '../components/layout'
 import client from "../client"
+import Link from 'next/link'
 
 export default function Custom404({...globalProps}) {
     return <Layout title="404" {...globalProps}>
@@ -16,7 +17,7 @@ export default function Custom404({...globalProps}) {
                         <div className="section_subtitle"></div>
                     </div>
                     <p className="text-center mb-5">I'm sorry, the page you are looking for is unavailable. Please choose an item from the menu or return to the homepage.</p>
-                    <div className="button mx-auto"><a href="/" target="_self">Go to Homepage</a></div>
+                    <div className="button mx-auto"><Link href="/"><a target="_self">Go to Homepage</a></Link></div>
                 </div>
             </div>
         </div>
