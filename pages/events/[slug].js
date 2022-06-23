@@ -9,8 +9,11 @@ import UpcomingEvents from '@/components/upcomingEvents'
 import {groqLinkProjection} from '@/components/sanity/link'
 import {findLinks} from 'helpers'
 import Error from '../404'
+import React, { useState, useEffect } from 'react';
 
 export default function Event({event, events, ...globalProps}) {
+    const [timeLeft, setTimeLeft] = useState(((new Date(event.startTime)).getTime() - (new Date()).getTime()))
+
     if(!event) return <Error />
     event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
     event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
@@ -19,6 +22,12 @@ export default function Event({event, events, ...globalProps}) {
         event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
     })
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeLeft(((new Date(event.startTime)).getTime() - (new Date()).getTime()))
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     return <Layout title={event.title + ' | Events'} {...globalProps}>
         <HomeBar title={event.title} breadcrumbs={[{title:'Home', link:'/'}, {title: 'Events', link: '/events/'}]}/>
@@ -38,6 +47,7 @@ export default function Event({event, events, ...globalProps}) {
                         </div>
                         <div className="col-9">
                             <div className="event_title mt-1">{event.title}</div>
+                            {timeLeft}
                             <ul className="event_row">
                                 <li>
                                     <div className="event_icon"><img src="/images/calendar.png" alt="" /></div>
@@ -60,19 +70,19 @@ export default function Event({event, events, ...globalProps}) {
                     <div className="event_timer_container d-flex justify-content-center">
                         <ul className="event_timer" data-event-time={event.startTime}>
                             <li>
-                                <div id="day" className="event_num">00</div>
+                                <div id="days" className="event_num">{Math.floor(timeLeft/1000/60/60/24)}</div>
                                 <div className="event_ss">day</div>
                             </li>
                             <li>
-                                <div id="hour" className="event_num">00</div>
+                                <div id="hours" className="event_num">{Math.floor(((timeLeft/1000) % (60*60*24))/60/60)}</div>
                                 <div className="event_ss">hrs</div>
                             </li>
                             <li>
-                                <div id="minute" className="event_num">00</div>
+                                <div id="minutes" className="event_num">{Math.floor(((timeLeft/1000) % (60*60))/60)}</div>
                                 <div className="event_ss">min</div>
                             </li>
                             <li>
-                                <div id="second" className="event_num">00</div>
+                                <div id="seconds" className="event_num">{Math.floor((timeLeft/1000) % (60))}</div>
                                 <div className="event_ss">sec</div>
                             </li>
                         </ul>
