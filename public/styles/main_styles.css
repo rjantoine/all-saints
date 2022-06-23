@@ -685,9 +685,9 @@ section
 }
 .hero_content
 {
-	position: absolute;
-	top: 40%;
-	left: 0;
+	/*position: absolute;*/
+	/*top: 40%;*/
+	/*left: 0;*/
 	width: 100%;
 	z-index: 10;
 }
@@ -704,8 +704,8 @@ section
 {
 	font-size: 18px;
 	color: #FFFFFF;
-	padding-left: 70px;
-	padding-right: 70px;
+	/*padding-left: 70px;*/
+	/*padding-right: 70px;*/
 	margin-top: 27px;
 }
 .hero_link
