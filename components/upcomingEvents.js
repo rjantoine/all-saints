@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import client from '../client'
 import imageUrlBuilder from '@sanity/image-url'
 import Image from "./sanity/image";
@@ -11,6 +12,12 @@ export default function UpcomingEvents({events, itemsPerPage=3, carousel, classN
         event.startTime = event.startTime ? new Date(event.startTime) : event.startTime
         event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
     })
+
+    const [activeEvents, setActiveEvents] = useState()
+    useEffect(() => {
+        const nowTime = Date.now()
+        setActiveEvents(events.filter(event => event.endTime > nowTime))
+    }, []);
 
     const itemComponent = event => {
         const cId = Date.now();
@@ -46,12 +53,12 @@ export default function UpcomingEvents({events, itemsPerPage=3, carousel, classN
 
     return <div className={`container-fluid${className ? ' '+className : ''}`}>
         { carousel && <Carousel
-            items={events}
+            items={activeEvents}
             itemsPerPage={{default:1, lg: 2, xl:3}}
             itemComponent={itemComponent}
         /> }
         { carousel || <Pagination
-            items={events}
+            items={activeEvents}
             itemsPerRow={{default:1, lg: 2, xl:3}}
             itemsPerPage={12}
             itemComponent={itemComponent}
