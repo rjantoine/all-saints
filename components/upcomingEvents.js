@@ -13,7 +13,7 @@ export default function UpcomingEvents({events, itemsPerPage=3, carousel, classN
         event.endTime = event.endTime ? new Date(event.endTime) : event.endTime
     })
     const nowTime1 = Date.now()
-    const [activeEvents, setActiveEvents] = useState(setActiveEvents(events.filter(event => event.endTime > nowTime1)))
+    const [activeEvents, setActiveEvents] = useState(events.filter(event => event.endTime > nowTime1))
     useEffect(() => {
         const nowTime2 = Date.now()
         setActiveEvents(events.filter(event => event.endTime > nowTime2))
