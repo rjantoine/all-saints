@@ -3,7 +3,9 @@ import Link from "next/link"
 
 // @TODO Add alt
 export default function Image({width, height, fit, value: image, withLink, ...props}) {
+    if(!image) return null
     let img = urlFor(image)
+    if(!img) return null
 
     if(height) img = img.height(height)
     else if(image.height) img = img.height(image.height)
